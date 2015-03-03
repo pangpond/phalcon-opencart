@@ -109,6 +109,14 @@ $di->set('db', function () use ($config) {
     ));
 });
 
+$di->set('dbOpencart', function () use ($config) {
+    return new DbAdapter(array(
+        'host' => $config->databaseOpencart->host,
+        'username' => $config->databaseOpencart->username,
+        'password' => $config->databaseOpencart->password,
+        'dbname' => $config->databaseOpencart->dbname
+    ));
+});
 /**
  * If the configuration specify the use of metadata adapter use it or use memory otherwise
  */

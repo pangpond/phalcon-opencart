@@ -7,29 +7,3 @@
         <?php $this->crumbs->render();?>
     </ul>
 </div>
-
-<ul class="gallery">
-    <li>
-        <div class="fileinput fileinput-new" data-provides="fileinput">
-            <div class="fileinput-preview thumbnail" data-trigger="fileinput">
-                <a href="#">
-                <?php echo $this->tag->image(array("img/notice.jpg", 'class' => "img-responsive")); ?>
-                </a>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="fileinput fileinput-new" data-provides="fileinput">
-            <div class="fileinput-preview thumbnail" data-trigger="fileinput">
-                <a href="#">
-                <?php echo $this->tag->image(array("img/mission.jpg", 'class' => "img-responsive")); ?>
-                </a>
-            </div>
-        </div>
-<!--         <div class="extras">
-            <div class="extras-inner">
-                <?php echo $this->tag->linkTo(array('img/mission.jpg', '<i class="fa fa-search"></i> ', 'class' => 'colorbox-image', 'rel' => 'group-1')) ?>
-            </div>
-        </div> -->
-    </li>
-</ul>
