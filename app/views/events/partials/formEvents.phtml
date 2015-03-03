@@ -1,0 +1,48 @@
+
+            <div class="box-content nopadding">
+                <div class="form-group">
+                    <label for="textfield" class="control-label col-sm-2"><?php echo $t->_("Name"); ?></label>
+                    <div class="col-sm-10">
+                        <?php echo $form->render("name") ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="textarea" class="control-label col-sm-2"><?php echo $t->_("Detail"); ?></label>
+                    <div class="col-sm-10">
+                        <?php echo $form->render("detail") ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="textfield" class="control-label col-sm-2"><?php echo $t->_("Venues"); ?></label>
+                    <div class="col-sm-10">
+                        <?php echo $form->render("venues") ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="textfield" class="control-label col-sm-2"><?php echo $t->_("Event Start"); ?></label>
+                    <div class="col-sm-10">
+                        <?php echo $form->render("start") ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="textfield" class="control-label col-sm-2"><?php echo $t->_("Event End"); ?></label>
+                    <div class="col-sm-10">
+                        <?php echo $form->render("end") ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="textfield" class="control-label col-sm-2"><?php echo $t->_("Organizer"); ?></label>
+                    <div class="col-sm-10">
+                        <?php echo $form->render("organizer") ?>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-actions pull-right">
+                            <?php echo $this->tag->submitButton(array($mt->_('Save Changes'), 'class' => 'btn btn-primary'))?>
+                            <?php echo $this->tag->linkTo(array("events", $mt->_('Cancel'), 'class' => 'btn')) ?>
+                        </div>
+                    </div>
+                </div>
+            </div>

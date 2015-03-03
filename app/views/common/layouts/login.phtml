@@ -1,0 +1,27 @@
+<body class='login'>
+    <div class="wrapper">
+        <h1>
+            <a href="<?php echo $baseUri ?>">
+            <?php echo Phalcon\Tag::image(array("img/logo-saat-little.png", "width" => "52")); ?>
+            Super S.A.A.T.</a>
+        </h1>
+        <div class="login-body">
+
+            <h2><?php echo $t->_("SIGN IN") ?></h2>
+
+            <?php echo $this->getContent(); ?>
+            <div class="forget">
+                
+
+                <a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank">
+                    <span>กรุณาใช้ Google Chrome <?php echo Phalcon\Tag::image(array("img/demo/chrome-icon.png", "width" => "32")); ?> เพื่อประสิทธิภาพสูงสุด</span>
+                </a>
+            </div>
+        </div>
+        <p align="center" style="color:#ffffff">สายด่วน 086-315-1424 (คุณพลอย)</p>
+    </div>
+
+
+    <!-- Items Template -->
+    <?php #$this->partial("guest/partials/modalRegister", array('title' => 'Create an Account', 'size' => 'big')) ?>
+</body>

@@ -1,0 +1,83 @@
+<?php echo $this->tag->form(array("members/register", "method" => "post", "class" => "form-validate form-vertical form-column form-bordered", 'enctype' => 'multipart/form-data', 'id' => 'rentReturn')) ?>
+    <div id="modalRegister" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $t->_("Create an Account"); ?></h4>
+                </div>
+                <!-- /.modal-header -->
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-sm-12 nopadding col-left">
+                            <div class="form-group">
+                                <label for="firstname" class="control-label">
+                                    <?php echo $mt->_("Member Name"); ?>
+                                    <small> (<?php echo $mt->_("Title"); ?> <?php echo $mt->_("Firstname"); ?> <?php echo $mt->_("Lastname"); ?>)</small>
+                               </label>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <?php echo $form->render("title") ?>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <?php echo $form->render("firstname") ?>
+                                    </div>
+                                     <div class="col-sm-4">
+                                        <?php echo $form->render("lastname") ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 nopadding col-left">
+                            <div class="form-group">
+                                <label for="member_code" class="control-label"><?php echo $mt->_("Member Code"); ?></label>
+                                <?php echo $form->render("member_code") ?>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 nopadding col-left">
+                            <div class="form-group">
+                                <label for="username" class="control-label"><?php echo $mt->_("Username"); ?></label>
+                                <?php echo $form->render("username") ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 nopadding col-left">
+                            <div class="form-group">
+                                <label for="password" class="control-label"><?php echo $mt->_("Password"); ?></label>
+                                <?php #echo Phalcon\Tag::passwordField(array("password", "size" => 30, 'id' => 'pwd')); ?>
+                                <?php echo $form->render("password", array('id' => 'pwd')) ?>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 nopadding col-left">
+                            <div class="form-group">
+                                <label for="confirm-password" class="control-label"><?php echo $mt->_("Confirm Password"); ?></label>
+                                <?php echo $form->render("confirm-password") ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.modal-body -->
+                <div class="modal-footer">
+      
+                    <?php echo $this->tag->hiddenField("member_name") ?>
+    
+
+                    <input type="hidden" name="status" id="status" value="1">
+                    <button type="button" class="btn" data-dismiss="modal" aria-hidden="true"><?php echo $mt->_("Cancel"); ?></button>
+                    <button type="submit" class="btn btn-primary"><?php echo $mt->_("Create an Account"); ?></button>
+                    
+                </div>
+                <!-- /.modal-footer -->
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</form>

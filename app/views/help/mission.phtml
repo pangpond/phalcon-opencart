@@ -1,0 +1,59 @@
+<?php $this->partial("common/partials/page-header", array('title' => $t->_('Mission'), 'size' => 'big')) ?>
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-list"></i>
+                    <?php echo $t->_('Mission') ?>
+                </h3>
+            </div>
+            <div class="box-content">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>มอบหมายให้ผู้อำนวยการ ส.บ.ม.ท. เก็บข้อมูลสมาชิกในสังกัดจังหวัดของตนโดยมีขั้นตอนดังนี้</h4>
+                        <ul class="gallery">
+                            <li>
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput">
+                                        <a href="#">
+                                        <?php echo $this->tag->image(array("img/mission.jpg", 'class' => "img-responsive")); ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="extras">
+                                    <div class="extras-inner">
+                                        <?php echo $this->tag->linkTo(array('img/mission.jpg', '<i class="fa fa-search"></i> ', 'class' => 'colorbox-image', 'rel' => 'group-1')) ?>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>&nbsp;</h4>
+                        <ol>
+                            <li>กรอกข้อมูลของตนเองให้ถูกต้องครบถ้วน และเก็บข้อมูลสมาชิก โดยเลือกวิธีการอย่างใดอย่างหนึ่ง คือ</li>
+                            <ul>
+                                <li>แจก URL, USERNAME, PASSWORD ให้สมาชิกในสังกัดจังหวัดของตน กรอกข้อมูลพร้อมอัพโหลดรูปถ่ายหน้าตรงของสมาชิกเข้าสู่ระบบ</li>
+                                <li>หรือ แจกเอกสารใบกรอกข้อมูลสมาชิกให้สมาชิกในสังกัดจังหวัดของตน และเก็บรวบรวมกลับมาให้ครบ เพื่อกรอกข้อมูลนั้นเข้าระบบ โดยใช้ USERNAME และ PASSWORD ที่ได้รับไป</li>
+                            </ul>
+                            <li>ผู้อำนวยการ ส.บ.ม.ท. จังหวัดตรวจสอบข้อมูลให้ถูกต้อง ครบถ้วน</li>
+                            <li>เมื่อมีข้อมูลสมาชิกในความรับผิดชอบครบ ให้แจ้งระบบว่าข้อมูลครบจำนวนแล้ว</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

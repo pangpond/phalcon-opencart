@@ -1,0 +1,10 @@
+<?php use Phoenix\Models\ItemsCategory; ?>
+<?php $this->partial("common/partials/page-header", array('title' => $t->_($title), 'size' => 'big')) ?>
+
+<?php echo $this->getContent() ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>

@@ -1,0 +1,47 @@
+<?php $this->partial("common/partials/page-header", array('title' => $t->_("Add Member"), 'size' => 'big')) ?>
+
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="pull-left">
+            <?php echo $this->tag->linkTo(array("events", '<i class="fa fa-reply"></i> ' . $mt->_("Back"), 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Back"))) ?>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-bars"></i>
+                    <?php echo $t->_("Events"); ?>
+                </h3>
+            </div>
+            <div class="box-content nopadding">
+                <?php echo $this->tag->form(array("events/create", "method" => "post", "class" => "form-validate form-horizontal form-bordered", 'enctype' => 'multipart/form-data', 'id' => "eventsCreate")) ?>
+                    <?php $this->partial("events/partials/formEvents") ?>
+                </form>
+            </div><!--box-content-->
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        if ($('.datepick').length > 0) {
+            $('.datepick').datetimepicker({ 
+                format: 'YYYY-MM-DD hh:mm:ss' 
+            });
+        }
+    });
+
+</script>

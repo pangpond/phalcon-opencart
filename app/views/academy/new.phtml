@@ -1,0 +1,232 @@
+<?php use Phoenix\Models\Province; ?>
+
+<?php $this->partial("common/partials/page-header", array('title' => $t->_("Add Member"), 'size' => 'big')) ?>
+
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="pull-left">
+            <?php echo $this->tag->linkTo(array("academy", '<i class="fa fa-reply"></i> ' . $mt->_("Back"), 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Back"))) ?>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-bars"></i>
+                    <?php echo $t->_("Office Area"); ?>
+                </h3>
+            </div>
+            <div class="box-content">
+                <?php echo $this->tag->form(array("", "method" => "post", "class" => "form-validate form-vertical form-column", 'id' => "frmFindArea")) ?>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <?php echo $form->render("areas") ?>
+                                <address id="areaDetail"></address>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-bars"></i>
+                    <?php echo $t->_("Academy"); ?>
+                </h3>
+                <ul class="tabs">
+                    <li class="active">
+                        <a href="#tab-account" data-toggle="tab"><?php echo $mt->_("Information"); ?></a>
+                    </li>
+                    <li>
+                        <a href="#tab-info" data-toggle="tab"><?php echo $mt->_("Additional"); ?></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="box-content nopadding">
+                <?php echo $this->tag->form(array("academy/create", "method" => "post", "class" => "form-validate form-vertical form-column form-bordered", 'enctype' => 'multipart/form-data', 'id' => "academyCreate")) ?>
+                    <?php $this->partial("academy/partials/formAcademy") ?>
+                </form>
+            </div><!--box-content-->
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        if ($('.datepick').length > 0) {
+            $('.datepick').datetimepicker({ 
+                format: 'YYYY-MM-DD hh:mm:ss' 
+            });
+        }
+    });
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        var getProvinceUrl = "/academy/grabProvince";
+        var getDistrictUrl = "/academy/grabDistrict";
+        var getSubDistrictUrl = "/academy/grabSubDistrict";
+
+        $("#geo").change(function() {
+            var value = $(this).val();
+
+
+            $("#district option")
+                .not(":first").remove();
+            $("#subdistrict option")
+                .not(":first").remove();
+
+            $.ajax({
+                type: "POST",
+                url: getProvinceUrl,
+                data: {"id": value},
+                success: function(response){
+                    $("#province option")
+                        .not(":first").remove();
+
+                    parsed = $.parseJSON(response);
+
+                    $.each(parsed, function(key, value) {
+                        $("#province")
+                            .append($("<option></option>")
+                            .attr("value",value.id)
+                            .text(value.name));
+                    });
+                }
+            });
+        });
+
+        $("#province").change(function() {
+            var value = $(this).val();
+
+
+            $("#subdistrict option")
+                .not(":first").remove();
+                
+            $.ajax({
+                type: "POST",
+                url: getDistrictUrl,
+                data: {"id": value},
+                success: function(response){
+                    $("#district option")
+                        .not(":first").remove();
+
+                    parsed = $.parseJSON(response);
+
+                    $.each(parsed, function(key, value) {
+                        $("#district")
+                            .append($("<option></option>")
+                            .attr("value",value.id)
+                            .text(value.name));
+                    });
+                }
+            });
+        });
+
+        $("#district").change(function() {
+            var value = $(this).val();
+
+            $.ajax({
+                type: "POST",
+                url: getSubDistrictUrl,
+                data: {"id": value},
+                success: function(response){
+                    $("#subdistrict option")
+                        .not(":first").remove();
+
+                    parsed = $.parseJSON(response);
+
+                    $.each(parsed, function(key, value) {
+                        $("#subdistrict")
+                            .append($("<option></option>")
+                            .attr("value",value.id)
+                            .text(value.name));
+                    });
+                }
+            });
+        });
+
+        $('#geo').val('1').change();
+
+
+        var getAcademiesUrl = "/academy/grabAcademies";
+        var getAreaUrl = "/academy/grabArea";
+        var getAcademyUrl = "/academy/grabAcademy";
+
+        $("#areas").change(function() {
+            var value = $(this).val();
+
+            $("#area_id").val(value);
+
+            $("#academyDetail").html('').hide();
+            $.ajax({
+                type: "POST",
+                url: getAreaUrl,
+                data: {"id": value},
+                success: function(response){
+
+                    area = $.parseJSON(response);
+                    $("#areaDetail").html(
+                        "<strong>" + area.name + "</strong>"
+                        + "<br>" + area.address
+                        + "<br>" + area.subdistrict_prefix + area.subdistrict_name
+                        + " " + area.district_prefix + area.district.district_name
+                        + " จังหวัด" + area.province.province_name
+                        + " " + area.zipcode
+                        + "<br><abbr title='Phone'>โทร:</abbr> " + area.telephone
+                        + "<br><abbr title='Fax'>แฟกซ์:</abbr> " + area.fax
+                    ).show('slow').fadeIn('slow');
+                }
+            });
+        });
+
+        $("#academies").change(function() {
+            var value = $(this).val();
+
+            $("#academy_id").val(value);
+
+            $("#academyDetail").html('').hide();
+            $.ajax({
+                type: "POST",
+                url: getAcademyUrl,
+                data: {"id": value},
+                success: function(response){
+
+                    academy = $.parseJSON(response);
+                    $("#academyDetail").html(
+                        "<strong>โรงเรียน" + academy.name + "</strong>"
+                        + "<br>" + academy.address
+                        + "<br>" + academy.subdistrict_prefix + academy.subdistrict_name
+                        + " " + academy.district_prefix + academy.district_name
+                        + " จังหวัด" + academy.province_name
+                        + " " + academy.zipcode
+                        + "<br><abbr title='Phone'>โทร:</abbr> " + academy.telephone
+                        + "<br><abbr title='Fax'>แฟกซ์:</abbr> " + academy.fax
+                    ).show('slow').fadeIn('slow');
+                }
+            });
+        });
+    });
+</script>

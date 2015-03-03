@@ -1,0 +1,438 @@
+<?php use Phoenix\Models\Academy; ?>
+<?php $this->partial("common/partials/page-header", array('title' => $t->_($title), 'size' => 'big')) ?>
+
+<?php echo $this->getContent() ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="pull-right">
+            <?php echo $this->tag->linkTo(array("members/new", '<i class="fa fa-plus"></i> ' . $t->_("Create Member"), 'class' => 'btn btn-primary', 'rel' => 'tooltip', 'title' => $t->_("Create Member"))) ?>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-bars"></i>
+                    <?php echo $t->_("Province"); ?>
+                </h3>
+            </div>
+            <div class="box-content">
+                <?php echo $this->tag->form(array("", "method" => "post", "class" => "form-validate form-vertical form-column", 'id' => "frmFindArea")) ?>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <?php echo $form->render("province_id") ?>
+                                <address id="provinceDetail"></address>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group pull-right">
+                                <a href="<?php echo $baseUri ?>members/<?php echo $searchType ?>" class="btn btn-primary btn-large" id="provinceLocation"><i class="fa fa-search"></i></i> <?php echo $mt->_("Search!"); ?> </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel-group panel-widget" id="ac3">
+            <div class="panel panel-default darkblue">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="#members" data-toggle="collapse" data-parent="#ac3">
+                            <i class="fa fa-table"></i> <?php echo $t->_($title); ?> <?php echo $mt->_("Latest"); ?>
+                        </a>
+                    </h4>
+                    <!-- /.panel-title -->
+                </div>
+                <!-- /.panel-heading -->
+                <div id="members" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="table table-hover table-nomargin table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class='hidden-480 col-sm-1'><?php echo $t->_("Code"); ?></th>
+                                    <th><?php echo $t->_("Name"); ?></th>
+                                    <th><?php echo $t->_("Member Type"); ?></th>
+                                    <th><?php echo $mt->_("School"); ?></th>
+                                    <th><?php echo $t->_("Location"); ?></th>
+                                    <th><?php echo $mt->_("Status"); ?></th>
+                                    <th><?php echo $t->_("Registered"); ?></th>
+                                    <th class='hidden-480 col-sm-2'><?php echo $mt->_("Options"); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($page->items as $member) { 
+
+                                $elementPeopleType = $this->elements->getMembersType();
+                                $memberType = $elementPeopleType[$member->type];
+
+
+                                $elementPrefix =$this->elements->getPrefixNameData();
+                                $memberTitle = $elementPrefix[$member->title];
+
+                                $registered = $this->datetime->date(strtotime($member->registered));
+
+                                $academy = Academy::findFirstByAcademy_id($member->membersAcademy->academy_id);
+                                $academyName = $academy->name;
+                                $areaName = $academy->area->name;
+                                
+                                $areaNameSearch = strpos($areaName, "เขต");
+                                if ($areaNameSearch == true) {
+                                    $areaNumber = str_replace("สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาเขต", "", $areaName);
+                                }else{
+                                    $areaNumber = str_replace("องค์กรปกครองส่วนท้องถิ่น ", "", $areaName);
+                                }
+
+                                $areaNumber = str_replace("สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาเขต", "", $areaName);
+                                $province = $member->province->province_name;
+                            ?>
+                                <tr>
+                                    <td><?php echo $member->code ?></td>
+                                    <td><?php echo $firstname = isset($keyword) ? str_replace($keyword, '<strong>'.$keyword.'</strong>', $member->firstname) : $memberTitle . ' ' . $member->firstname . ' ' . $member->lastname ?></td>
+                                    <td><?php echo $memberType ?></td>
+                                    <td><?php echo $mt->_("School") . $academyName ?></td>
+                                    <td class='hidden-350'>
+                                        <?php echo '<span class="label label-default">' . $areaNumber . '</span>'; ?>
+                                        <?php echo '<span class="label label-default">' . $province . '</span>'; ?>
+                                    </td>
+
+                                    <td class='hidden-350'><?php echo $activeStatus = ($member->status) ? '<span class="label label-satgreen">' . $t->_("Active") . '</span>' : '<span class="label label-lightred">' . $t->_("Inactive") . '</span>'; ?></td>
+
+                                    <td><?php echo $registered ?></td>
+                                    <td class='hidden-480'>
+                                        <?php echo $this->tag->linkTo(array("members/view/" . $member->member_id, '<i class="fa fa-eye"></i>', 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("View"))); ?>
+                                        <?php echo $this->tag->linkTo(array("members/edit/" . $member->member_id, '<i class="fa fa-edit"></i>', 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Edit"))); ?>
+                                        <a href="#modalDeleteConfirm" role="button" class="btn" rel="tooltip" title="<?php echo $mt->_("Delete") ?>" data-original-title="<?php echo $mt->_("Delete")?>" data-toggle="modal" onclick="deleteConfirm('<?php echo $member->member_id ?>', '<?php echo $memberTitle . ' ' . $member->firstname . ' ' . $member->lastname ?>')"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+
+                        <div class="tables-info pull-left">
+                            <?php echo $mt->_("Showing page") . " <span>", $page->current, "</span> " . $mt->_("of") . " <span>", $page->total_pages, "</span> " . $mt->_("pages") . " (<span>", $page->total_items, "</span> " . $mt->_("entries") . ")"; ?>
+                        </div>
+
+                        <div class="table-pagination pull-right">
+                            <a href="<?php echo $baseUri ?>members/<?php echo $searchType ?>"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"> <?php echo $mt->_("First"); ?></i></a>
+                            <a href="<?php echo $baseUri ?>members/<?php echo $searchType ?>?page=<?= $page->before; ?>"><i class="fa fa-chevron-left"> <?php echo $mt->_("Previous"); ?></i></a>
+
+                            <a href="<?php echo $baseUri ?>members/<?php echo $searchType ?>?page=<?= $page->next; ?>"><?php echo $mt->_("Next"); ?> <i class="fa fa-chevron-right"></i></a>
+                            <a href="<?php echo $baseUri ?>members/<?php echo $searchType ?>?page=<?= $page->last; ?>"><?php echo $mt->_("Last"); ?> <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /#members.panel-collapse collapse in -->
+            </div>
+            <!-- /.panel panel-default -->
+            <div class="panel panel-default darkblue">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="#basic" data-toggle="collapse" data-parent="#ac3">
+                            <i class="fa fa-search"></i> <?php echo $mt->_("Basic Search"); ?>
+                        </a>
+                    </h4>
+                    <!-- /.panel-title -->
+                </div>
+                <!-- /.panel-heading -->
+                <div id="basic" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php echo $this->tag->form(array("members/basicsearch", "method" => "post", "autocomplete" => "off", "class" => "form-vertical form-column form-bordered search-form")) ?>
+                            <div class="input-group ">
+                                <?php echo $this->tag->textField(array("keyword", 'class' => 'form-control', 'placeholder' => $mt->_("Search here..."))) ?>
+                                <div class="input-group-btn">
+                                    <?php echo $this->tag->submitButton(array($mt->_("Search!"), 'class' => 'btn btn-primary btn-large input-group-addon')) ?>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /#basic.panel-collapse collapse -->
+            </div>
+            <!-- /.panel panel-default -->
+            <div class="panel panel-default darkblue">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="#advance" data-toggle="collapse" data-parent="#ac3">
+                            <i class="fa fa-search"></i> <?php echo $mt->_("Advanced Search"); ?>
+                        </a>
+                    </h4>
+                    <!-- /.panel-title -->
+                </div>
+                <!-- /.panel-heading -->
+                <div id="advance" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php echo $this->tag->form(array("members/search", "method" => "post", "autocomplete" => "off", "class" => "form-vertical form-column form-bordered")) ?>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!--First Tab-->
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <label for="title" class="control-label"><?php echo $mt->_("Title"); ?></label>
+                                                        <?php echo $form->render("title") ?>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <label for="firstname" class="control-label"><?php echo $mt->_("Firstname"); ?></label>
+                                                        <?php echo $form->render("firstname") ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="position" class="control-label">
+                                                            <?php echo $mt->_("Current Position"); ?> / <?php echo $mt->_("Latest Position"); ?>
+                                                        </label>
+                                                        <?php echo $form->render("position") ?>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="citizenid" class="control-label">
+                                                            <?php echo $mt->_("Citizen Id"); ?>
+                                                        </label>
+                                                        <?php echo $form->render("citizenid") ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <label for="standing" class="control-label"><?php echo $mt->_("Academic Standing"); ?></label>
+                                                        <?php echo $form->render("standing") ?>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label for="bloodgroup" class="control-label"><?php echo $mt->_("Blood Group"); ?></label>
+                                                        <?php echo $form->render("bloodgroup") ?>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label for="nationality" class="control-label"><?php echo $mt->_("Nationality"); ?></label>
+                                                        <?php echo $form->render("nationality") ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address" class="control-label">
+                                                    <?php echo $mt->_("Address"); ?>
+                                               </label>
+                                                <?php echo $form->render("address") ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="geo" class="control-label">
+                                                            <?php echo $mt->_("Zone"); ?>
+                                                        </label>
+                                                        <?php echo $form->render("geo") ?>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="province" class="control-label">
+                                                            <?php echo $mt->_("Province"); ?>
+                                                        </label>
+                                                        <?php echo $form->render("province") ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <label for="zipcode" class="control-label">
+                                                            <?php echo $mt->_("Zipcode"); ?>
+                                                       </label>
+                                                        <?php echo $form->render("zipcode") ?>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <label for="email" class="control-label">
+                                                            <?php echo $mt->_("Email"); ?>
+                                                       </label>
+                                                        <?php echo $form->render("email") ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="fax" class="control-label">
+                                                    <?php echo $mt->_("Fax"); ?>
+                                                    <small><?php echo $mt->_("Format Fax"); ?></small>
+                                               </label>
+                                                <?php echo $form->render("fax") ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-right">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="lastname" class="control-label">
+                                                            <?php echo $mt->_("Lastname"); ?>
+                                                       </label>
+                                                        <?php echo $form->render("lastname") ?>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="code" class="control-label">
+                                                            <?php echo $mt->_("Code"); ?>
+                                                       </label>
+                                                        <?php echo $form->render("code") ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="type" class="control-label">
+                                                            <?php echo $mt->_("Member Type"); ?>
+                                                        </label>
+                                                        <?php echo $form->render("type") ?>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="registered" class="control-label"><?php echo $t->_("Registered"); ?>
+                                                            <small><?php echo $mt->_("Format Date"); ?></small>
+                                                        </label>
+                                                         <div class="input-group">
+                                                            <?php echo $form->render("registered") ?>
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </span>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="birthday" class="control-label">
+                                                    <?php echo $mt->_("Birth Date"); ?>
+                                               </label>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <?php echo $form->render("birthday") ?>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <?php echo $form->render("birthmonth") ?>
+                                                    </div>
+                                                     <div class="col-sm-4">
+                                                        <?php echo $form->render("birthyear") ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address2" class="control-label">
+                                                    <?php echo $mt->_("Address"); ?>
+                                                    <small> (<?php echo $mt->_("Additional"); ?>) </small>
+                                               </label>
+                                                <?php echo $form->render("address2") ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="district" class="control-label">
+                                                            <?php echo $mt->_("District"); ?>
+                                                        </label>
+                                                        <?php echo $form->render("district") ?>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="subdistrict" class="control-label">
+                                                            <?php echo $mt->_("Sub District"); ?>
+                                                        </label>
+                                                        <?php echo $form->render("subdistrict") ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label for="telephone" class="control-label">
+                                                            <?php echo $mt->_("Telephone"); ?>
+                                                            <small><?php echo $mt->_("Format Telephone"); ?></small>
+                                                        </label>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <?php echo $form->render("area_code") ?>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <?php echo $form->render("telephone") ?>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="mobile" class="control-label">
+                                                            <?php echo $mt->_("Mobile"); ?>
+                                                            <small><?php echo $mt->_("Format Mobile"); ?></small>
+                                                       </label>
+                                                        <?php echo $form->render("mobile") ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textfield" class="control-label"><?php echo $mt->_("Status"); ?></label>
+                                                <div class="row">
+                                                    <div class="check-line col-sm-6">
+                                                        <?php echo Phalcon\Tag::radioField(array("status", "value" => "1", 'class' => 'icheck-me', 'data-skin' => 'square', 'data-color' => 'blue', 'id' => 'active'))?> 
+                                                        <label class='inline' for="active"><?php echo $t->_("Active"); ?></label>
+                                                    </div>
+                                                    <div class="check-line col-sm-6">
+                                                        <?php echo Phalcon\Tag::radioField(array("status", "value" => "0", 'class' => 'icheck-me', 'data-skin' => 'square', 'data-color' => 'blue', 'id' => 'inactive'))?> 
+                                                        <label class='inline' for="inactive"><?php echo $t->_("Inactive"); ?></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-actions pull-right">
+                                                <?php echo $this->tag->submitButton(array($mt->_('Search!'), 'class' => 'btn btn-primary btn-large')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /#advance.panel-collapse collapse in -->
+            </div>
+            <!-- /.panel panel-default -->
+        </div>
+        <!-- /.panel-group -->
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        var getProvinceUrl = "/members/grabProvince";
+
+        $("#province_id").change(function() {
+            var value = $(this).val();
+
+            $("#provinceLocation").attr("href", '/members/province/' + value);
+
+        });
+
+        $('#province_id').val('<?php echo $province_id ?>').change();
+    });
+
+</script>
+
+<?php $this->partial("members/partials/modalDeleteConfirm", array('title' => 'Delete Member', 'size' => 'big')) ?>
+
+

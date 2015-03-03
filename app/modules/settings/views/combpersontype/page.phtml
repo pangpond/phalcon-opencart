@@ -1,0 +1,118 @@
+<?php use Phalcon\Tag; ?>
+
+<div align="center">
+    <h1><?php echo $t->_("items")?> <?php echo $mt->_("setting")?></h1>
+</div>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+
+<?php echo $this->getContent(); ?>
+
+<div align="left" style="margin-top:20px;">
+    <?php echo $this->tag->linkTo(array(array('for' => 'settings-full', 'controller' => 'items', 'action' => 'new'), '<i class="fa fa-plus"></i> '. $t->_("items"), 'class' => 'btn btn-primary', 'rel' => 'tooltip', 'title' => $mt->_("add data"))) ?>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-color box-bordered">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-table"></i><?php echo $t->_("items"); ?>
+                </h3>
+            </div>
+            <div class="box-content nopadding">
+                <table class="table table-hover table-nomargin table-bordered">
+                    <thead>
+                        <tr>
+                            <th class='with-checkbox'></th>
+                            <th><?php echo $t->_("id"); ?></th>
+                            <th><?php echo $t->_("items"); ?></th>
+                            <th class='hidden-350'><?php echo $t->_("status"); ?></th>
+                            <th class='hidden-1024'>Member since</th>
+                            <th class='hidden-480'><?php echo $t->_("options"); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            if(isset($page->items)){
+                                foreach($page->items as $ComBPersonType){ 
+                        ?>
+                            <tr>
+                                <td class="with-checkbox">
+                                    <input type="checkbox" name="check" value="1">
+                                </td>
+                                <td><?php echo $ComBPersonType->PersonTypeID ?></td>
+                                <td><?php echo $ComBPersonType->PersonTypeName ?></td>
+                                <td class='hidden-350'><?php echo $activeStatus = ($ComBPersonType->ActiveStatus) ? '<span class="label label-satgreen">เปิดใช้</span>' : '<span class="label label-lightred">ไม่ใช้</span>'; ?></td>
+                                <td class='hidden-1024'>03-07-2013</td>
+                                <td class='hidden-480'>
+                                    <?php echo $this->tag->linkTo(array("settings/persontype/view/" . $ComBPersonType->PersonTypeID, '<i class="fa fa-search"></i>', 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("view"))); ?>
+                                    <?php echo $this->tag->linkTo(array("settings/persontype/edit/" . $ComBPersonType->PersonTypeID, '<i class="fa fa-edit"></i>', 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("edit"))); ?>
+
+                                    <a href="#modal-1" role="button" class="btn" rel="tooltip" title="<?php echo $mt->_("delete") ?>" data-original-title="<?php echo $mt->_("delete")?>" data-toggle="modal" onclick="deleteConfirm('<?php echo $ComBPersonType->PersonTypeID ?>', '<?php echo $ComBPersonType->PersonTypeName ?>')"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+
+                        <?php }
+                            } ?>
+                    </tbody>
+                </table>
+
+
+                <div class="dataTables_info" id="DataTables_Table_1_info">
+                    <?php echo "Showing page <span>", $page->current, "</span> of <span>", $page->total_pages, "</span> pages (<span>", $page->total_items, "</span> entries)"; ?>
+                </div>
+
+                <div class="table-pagination">
+                    <a href="/phoenix/settings/persontype/page">First</a>
+                    <a href="/phoenix/settings/persontype/page?page=<?= $page->before; ?>">Previous</a>
+<!--                     <span>
+                        <a href="#" class='active'>1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                    </span> -->
+                    <a href="/phoenix/settings/persontype/page?page=<?= $page->next; ?>">Next</a>
+                    <a href="/phoenix/settings/persontype/page?page=<?= $page->last; ?>">Last</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal-1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+            </div>
+            <!-- /.modal-header -->
+            <div class="modal-body">
+                <p>Are you sure you want to delete? </p>
+                <p id="deleteTitle"></p>
+            </div>
+            <!-- /.modal-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <?php echo $this->tag->linkTo(array('#', 'Yes', 'class' => 'btn btn-primary', 'id' => 'deleteID')); ?>
+            </div>
+            <!-- /.modal-footer -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /#modal-1.modal fade -->
+
+
+<script>
+        function deleteConfirm(id, title){
+            $('#deleteID').attr("href", '/phoenix/settings/persontype/delete/' + id)
+            $('#deleteTitle').html(title)
+        }
+</script>

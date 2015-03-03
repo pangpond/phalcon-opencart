@@ -1,0 +1,38 @@
+<?php 
+
+use Phalcon\Tag; 
+
+use Phalcon\Forms\Form,
+    Phalcon\Forms\Element\Text,
+    Phalcon\Forms\Element\Select,
+    Phalcon\Validation\Validator\PresenceOf,
+    Phalcon\Validation\Validator\StringLength;
+
+$form = new Form();
+$form->add(new Text("name"));
+$form->add(new Text("email",  array(
+    'maxlength' => 100, 
+    'placeholder' => 'Type your email'
+)));
+
+?>
+<?php echo $this->getContent(); ?>
+<h2>Sign up using this form</h2>
+
+<?php echo Tag::form(array("signup/register", "method" => "get")); ?>
+
+ <p>
+    <label for="name">Name</label>
+    <?php echo Tag::textField(array("name", 'maxlength' => 30, 'placeholder' => 'Type your name')) ?>
+ </p>
+
+ <p>
+    <label for="email">E-Mail</label>
+    <?php echo $form->render("email") ?>
+ </p>
+
+ <p>
+    <?php echo Tag::submitButton(array("Register", 'class' => 'btn btn-primary')) ?>
+ </p>
+
+</form>

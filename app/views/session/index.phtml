@@ -1,0 +1,31 @@
+<?php 
+
+use Phalcon\Tag;
+
+?>
+<?php echo $this->getContent(); ?>
+
+<?php echo Tag::form(array("session/start", "method" => "post", 'class' => 'form-validate', 'id' => 'test')); ?>
+    <div class="form-group">
+        <div class="email controls">
+            <?php echo Tag::textField(array("username", 'maxlength' => 30, 'placeholder' => $t->_("User Name"), 'class' => 'form-control', 'required' => 'true', 'value' => '')) ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="pw controls">
+            <?php echo Tag::passwordField(array("password", "size" => 30, 'placeholder' => $t->_("Password"), 'class' => 'form-control', 'required' => 'true')); ?>
+        </div>
+    </div>
+    <div class="submit">
+        <div class="remember">
+<!--             <?php echo $t->_("Don't have an account?,") ?>
+            <a href="#modalRegister" data-toggle="modal">
+                <span><?php echo $t->_("Create Account") ?></span>
+            </a> -->
+        </div>
+<!--         <div class="remember">
+            <input type="checkbox" name="remember" class='icheck-me' data-skin="square" data-color="blue" id="remember"> <label for="remember"><?php echo $t->_("Remember me") ?></label>
+        </div> -->
+        <?php echo Tag::submitButton(array($t->_("Sign me in"), 'class' => 'btn btn-primary')) ?>
+    </div>
+</form>

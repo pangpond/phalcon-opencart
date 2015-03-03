@@ -1,0 +1,208 @@
+<?php use Phoenix\Models\Province; ?>
+
+<?php $this->partial("common/partials/page-header", array('title' => $t->_("Scan Membership Card"), 'size' => 'big')) ?>
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+
+<?php echo $this->tag->hiddenField("lot_id") ?>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="box box-bordered box-color">
+                <div class="box-title">
+                    <h3>
+                        <i class="fa fa-bars"></i>
+                        <?php echo $t->_("Citizen Id"); ?>
+                    </h3>
+                </div>
+                <div class="box-content">
+                    <div class="row">
+                        <?php echo $this->tag->form(array("", "method" => "post", "class" => "form-validate form-vertical form-column", 'id' => "frmFindMemberByCitizenId")) ?>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <?php echo $this->tag->textField(array("citizenid", "size" => 30, 'class' => 'form-control', 'tabindex' => 14)) ?>
+                                         <a href="#" class="btn btn-primary input-group-addon" id="findMemberCitizenId">
+                                            <i class="fa fa-search"></i>
+                                            <?php echo $t->_("Find Member"); ?>
+                                        </a>
+                                    </div>
+                                    <span class="help-block">
+                                        <?php echo $t->_("Please enter citizen id"); ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="box box-bordered box-color">
+                <div class="box-title">
+                    <h3>
+                        <i class="fa fa-bars"></i>
+                        <?php echo $t->_("Card Id"); ?>
+                    </h3>
+                </div>
+                <div class="box-content">
+                    <div class="row">
+                        <?php echo $this->tag->form(array("", "method" => "post", "class" => "form-validate form-vertical form-column", 'id' => "frmFindMemberByCardId")) ?>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <?php echo $this->tag->textField(array("card_id", "size" => 30, 'class' => 'form-control', 'tabindex' => 14)) ?>
+                                         <a href="#" class="btn btn-primary input-group-addon" id="findMemberCardId">
+                                            <i class="fa fa-search"></i>
+                                            <?php echo $t->_("Find Member"); ?>
+                                        </a>
+                                    </div>
+                                    <span class="help-block">
+                                        <?php echo $t->_("Please enter citizen id"); ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <?php $this->partial("members/partials/memberProfile") ?>
+
+
+<script>
+    $(document).ready(function() {
+
+        $('#card_id').focus();
+
+        $('#findMemberCardId').click(function() {
+            $('#frmFindMemberByCardId').submit();
+        });
+
+        $('#frmFindMemberByCardId').submit(function() 
+        {
+
+
+            $('#profile').fadeOut('slow');
+
+            card_id = $("input[name=card_id]").val();
+
+            var data = {
+              "card_id": card_id
+            };
+            data = $(this).serialize() + "&" + $.param(data);
+
+            $.ajax({
+                url: '/members/grabMember/rfid',
+                
+                type: 'POST',
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if(data.status == 'success'){
+                        // $('.spinner-load').hide();
+                        $('#profile').fadeIn('slow');
+
+                        $('#mapping_member_id').val(data.memberId);
+                        $('#type').html(data.memberType);
+                        $('#name').html(data.memberName);
+                        $('#name_en').html(data.memberNameEN);
+                        $('#citizen_id').html(data.memberCitizenId);
+                        $('#code').html(data.memberCode);
+                        $('#bloodgroup').html(data.memberBloodGroup);
+                        $('#image').html(data.memberImage);
+                        $('#academy_province').html(data.memberAcademyProvince);
+                        $('#academy').html(data.memberAcademy);
+
+                        $("input[name=citizenid]").val('');
+                        $("input[name=card_id]").focus();
+                    }
+                    else{
+                        alert(data.msg);
+                    }
+
+                    console.log(data);
+                    // alert(data.memberName)
+                }, 
+                error: function (xhr, status, data) {  
+                  console.log(status);
+                  alert('<?php echo $t->_("Data Not Found"); ?> (' + status + ')'); 
+                }  
+            });
+
+            return false; // keeps the page from not refreshing 
+        });
+
+        $('#findMemberCitizenId').click(function() {
+            $('#frmFindMemberByCitizenId').submit();
+        });
+
+        $('#frmFindMemberByCitizenId').submit(function() 
+        {
+
+
+            $('#profile').fadeOut('slow');
+
+            citizenid = $("input[name=citizenid]").val();
+
+            var data = {
+              "citizenid": citizenid
+            };
+            data = $(this).serialize() + "&" + $.param(data);
+
+            $.ajax({
+                url: '/members/grabMember/citizenid',
+                
+                type: 'POST',
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if(data.status == 'success'){
+                        // $('.spinner-load').hide();
+                        $('#profile').fadeIn('slow');
+
+                        $('#mapping_member_id').val(data.memberId);
+                        $('#type').html(data.memberType);
+                        $('#name').html(data.memberName);
+                        $('#name_en').html(data.memberNameEN);
+                        $('#citizen_id').html(data.memberCitizenId);
+                        $('#code').html(data.memberCode);
+                        $('#bloodgroup').html(data.memberBloodGroup);
+                        $('#image').html(data.memberImage);
+                        $('#academy_province').html(data.memberAcademyProvince);
+                        $('#academy').html(data.memberAcademy);
+                        $('#geo').html(data.memberGeo);
+
+                        $("input[name=card_id]").val('');
+                        $("input[name=citizenid]").focus();
+                    }
+                    else{
+                        alert(data.msg);
+                    }
+
+                    console.log(data);
+                    // alert(data.memberName)
+                }, 
+                error: function (xhr, status, data) {  
+                  console.log(status);
+                  alert('<?php echo $t->_("Data Not Found"); ?> (' + status + ')'); 
+                }  
+            });
+
+            return false; // keeps the page from not refreshing 
+        });
+
+    });
+
+</script>

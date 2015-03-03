@@ -1,0 +1,62 @@
+    
+    <body style="padding:90px 20px 200px 20px;">
+        
+
+        <div id="content" style="text-align:center;border:0px solid; margin:0; padding:0 20px 0px 20px;">
+            <div class="non-box">
+                <img src="img/saat.jpg" alt="" style="width:100px">
+                <h1 class="xxxl event-title">เอกสารการลงทะเบียนสมาชิก ส.บ.ม.ท. จังหวัด{{PROVINCE}}</h1>
+                <h2 class="xxl event-desp">ผู้เข้าร่วมการประชุมสัมมนาวิชาการและประชุมใหญ่สามัญประจำปี ๒๕๕๗<br>
+                ระหว่างวันที่  ๑๕-๑๘ มีนาคม ๒๕๕๘ <br>
+                ณ ศูนย์การประชุมเดอะมอลล์นครราชสีมา</h2>
+            </div>
+        </div>
+        <br><br>
+            <table class="box" style="margin: 0 auto; width:80%;page-break-inside: auto;">
+                <thead>
+                    <tr>
+                        <td style="width: 10%; " class="text-center xl b" >ลำดับที่</td>
+                        <td style="width: 30%; " class="text-center xl b">ผู้เข้าร่วมประชุม</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ROW}}
+                </tbody>
+            </table>
+
+        <div id="footer" style="display:block; width:100%;">
+             <div class="pos-a" style="display:block; width:400px; float:right; margin-left:50px;  right:80px; border:0px solid;">
+                <div class="fill-form-1col">
+                    <p class="fill-form">
+                        <span class="table"><span class="tr">
+                            <span class="d-title-normal xl b" style="width: 55px;">&nbsp;&nbsp;&nbsp;ลงชื่อ</span>
+                            <span class="d-detail" style="width: 270px;">&nbsp;</span>
+                            <span class="d-title-normal xl b" style="width: 100px;">ผู้รับรอง</span>
+                        </span></span>
+                    </p>
+                  </div>
+                  <br><br>
+                  <div class="fill-form-1col">
+                    <p class="fill-form">
+                        <span class="table"><span class="tr">
+                            <span class="d-title-normal xl" style="width: 55px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</span>
+                            <span class="d-detail" style="width: 270px;">&nbsp;</span>
+                            <span class="d-title-normal xl" style="width: 100px;">)</span>
+                        </span></span>
+                    </p>
+                  </div>
+                  <br>
+                  <div class="fill-form-1col">
+                    <p class="fill-form">
+                        <span class="table"><span class="tr">
+                            <span class="d-title-normal xl b" style="width: 40px;">ตำแหน่ง</span>
+                            <span class="d-detail xl text-center" style="width: 270px;">ผู้อำนวยการส.บ.ม.ท.จังหวัด{{PROVINCE}}</span>
+                        </span></span>
+                    </p>
+                  </div>
+
+            </div>
+            <p class="page pos-a" style="display:block; width:100%; text-align:center; bottom:20px;">หน้า </p>
+        </div>
+
+    </body>

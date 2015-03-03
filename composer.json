@@ -1,0 +1,15 @@
+{
+    "require": {
+        "phpunit/phpunit": "4.1.2",
+        "phalcon/incubator": "dev-master",
+        "mailgun/mailgun-php": "dev-master",
+        "swiftmailer/swiftmailer": "@stable",
+        "amazonwebservices/aws-sdk-for-php" : "~1.0",
+        "phpoffice/phpexcel": "dev-master",
+        "ropendev/datatablesphp": "dev-master",
+        "m1ome/phalcon-datatables": "dev-master",
+        "dompdf/dompdf": "dev-master",
+        "tecnick.com/tcpdf": "dev-master",
+        "phenx/php-font-lib" : "0.2.1"
+    }
+}

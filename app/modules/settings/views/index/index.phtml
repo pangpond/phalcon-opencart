@@ -1,0 +1,286 @@
+<?php $this->partial("/../../../views/common/partials/page-header", array('title' => $t->_("System Setting"), 'size' => 'big')) ?>
+
+<?php echo $this->getContent() ?>
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel-group panel-widget" id="ac3">
+            <div class="box box-bordered box-color darkblue">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-bars"></i>
+                    <?php echo $t->_("System Setting"); ?>
+                </h3>
+                <ul class="tabs">
+                    <li class="active">
+                        <a href="#tab-basic" data-toggle="tab"><?php echo $t->_("Basic"); ?></a>
+                    </li>
+                    <li>
+                        <a href="#tab-school" data-toggle="tab"><?php echo $t->_("School"); ?></a>
+                    </li>
+                    <li>
+                        <a href="#tab-rule" data-toggle="tab"><?php echo $t->_("Rule"); ?></a>
+                    </li>
+                </ul>
+            </div>
+
+                <div class="box-content" style="padding:0;">
+                <?php echo $this->tag->form(array("settings/index/save", "method" => "post", "class" => "form-validate form-vertical form-column form-bordered", 'enctype' => 'multipart/form-data', 'id' => "indexEdit")) ?>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-basic">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!--First Tab-->
+                                    <div class="row">
+                                        <div class="col-sm-3 col-left">
+                                            <div class="form-group">
+                                                <label for="name" class="control-label"><?php echo $t->_("Allowed to borrow"); ?></label>
+                                                <?php echo $this->tag->textField(array("meta[borrow_day]", "size" => 30, 'class' => 'form-control')); ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name" class="control-label"><?php echo $t->_("Adjustment of the overdue loan"); ?></label>
+                                                <?php
+
+                                                echo $this->tag->selectStatic(array("meta[borrow_fine_status]", $this->elements->getBorrowFineStatus(), 
+                                                        'class' => 'form-control', 
+                                                        'useEmpty' => true,
+                                                        'emptyText' => $mt->_('Please, choose one...'),
+                                                        'id' => 'borrow_fine_status',
+                                                    )) ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name" class="control-label"><?php echo $t->_("Overdue fines cost"); ?></label>
+                                                <?php
+                                                $fineValue = array();
+                                                for ($i=0; $i < 21; $i++) { 
+                                                    array_push($fineValue, $i);
+                                                }
+
+                                                echo $this->tag->selectStatic(array("meta[borrow_fine]", 
+                                                        'class' => 'form-control',$fineValue,
+                                                        'useEmpty' => true,
+                                                        'emptyText' => $mt->_('Please, choose one...'),
+                                                        'id' => 'borrow_fine',
+                                                    )) ?>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-actions pull-right">
+                                                <?php echo $this->tag->submitButton(array($mt->_("Save Changes"), 'class' => 'btn btn-primary')) ?>
+                                                <?php echo $this->tag->linkTo(array("settings", $mt->_("Cancel"), 'class' => 'btn')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div><!--tab-basic-->
+
+
+
+                        <div class="tab-pane" id="tab-school">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!--Second Tab-->
+                                    <div class="row">
+                                        <div class="col-sm-3 col-left">
+                                            <div class="form-group">
+                                                <label for="academy_code" class="control-label"><?php echo $t->_("Academy Code"); ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[academy_code]", "size" => 20, 'class' => 'form-control', 'id' => 'academy_code')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="academy_name" class="control-label"><?php echo $t->_("Academy Name"); ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[academy_name]", "size" => 50, 'class' => 'form-control', 'id' => 'academy_name')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="academy_department" class="control-label"><?php echo $t->_("Academy Department"); ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[academy_department]", "size" => 50, 'class' => 'form-control', 'id' => 'academy_department')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="academy_area" class="control-label"><?php echo $t->_("Academy Area"); ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[academy_area]", "size" => 50, 'class' => 'form-control', 'id' => 'academy_area')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 250px; height: 151px;">
+                                                   
+                                                    <?php echo $this->tag->image($academyImage); ?>
+
+                                                    </div>
+                                                    <div>
+                                                        <span class="btn btn-default btn-file">
+                                                            <span class="fileinput-new">Select image</span>
+                                                        <span class="fileinput-exists">Change</span>
+                                                        <?php echo $this->tag->fileField(array("academy_image", 'id' => 'academy_image')) ?>
+                                                        </span>
+                                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-actions pull-right">
+                                                <?php echo $this->tag->submitButton(array($mt->_("Save Changes"), 'class' => 'btn btn-primary')) ?>
+                                                <?php echo $this->tag->linkTo(array("settings", $mt->_("Cancel"), 'class' => 'btn')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--tab-school-->
+
+
+                        <div class="tab-pane" id="tab-rule">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!--Third Tab-->
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="rule_1" class="control-label"><?php echo $t->_("Rule ")."1"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_1]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_1')) ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-right">
+                                            <div class="form-group">
+                                                <label for="rule_2" class="control-label"><?php echo $t->_("Rule ")."2"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_2]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_2')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="rule_3" class="control-label"><?php echo $t->_("Rule ")."3"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_3]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_3')) ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-right">
+                                            <div class="form-group">
+                                                <label for="rule_4" class="control-label"><?php echo $t->_("Rule ")."4"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_4]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_4')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="rule_5" class="control-label"><?php echo $t->_("Rule ")."5"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_5]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_5')) ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-right">
+                                            <div class="form-group">
+                                                <label for="rule_6" class="control-label"><?php echo $t->_("Rule ")."6"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_6]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_6')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="rule_7" class="control-label"><?php echo $t->_("Rule ")."7"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_7]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_7')) ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-right">
+                                            <div class="form-group">
+                                                <label for="rule_8" class="control-label"><?php echo $t->_("Rule ")."8"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_8]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_8')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="rule_9" class="control-label"><?php echo $t->_("Rule ")."9"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_9]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_9')) ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-right">
+                                            <div class="form-group">
+                                                <label for="rule_10" class="control-label"><?php echo $t->_("Rule ")."10"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_10]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_10')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="rule_11" class="control-label"><?php echo $t->_("Rule ")."11"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_11]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_11')) ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-right">
+                                            <div class="form-group">
+                                                <label for="rule_12" class="control-label"><?php echo $t->_("Rule ")."12"; ?>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[rule_12]", "size" => 50, 'class' => 'form-control', 'id' => 'rule_12')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-actions pull-right">
+                                                <?php echo $this->tag->submitButton(array($mt->_("Save Changes"), 'class' => 'btn btn-primary')) ?>
+                                                <?php echo $this->tag->linkTo(array("settings", $mt->_("Cancel"), 'class' => 'btn')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--tab-rule-->
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.panel panel-default -->
+        </div>
+        <!-- /.panel-group -->
+    </div>
+</div>

@@ -1,0 +1,135 @@
+<?php use Phoenix\Models\Province; ?>
+
+<?php $this->partial("common/partials/page-header", array('title' => $t->_("Academy Profile"), 'size' => 'big')) ?>
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+
+<?php 
+if(isset($auth) && $auth['role'] == 'A') :
+?>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="pull-left">
+            <?php echo $this->tag->linkTo(array("academy", '<i class="fa fa-reply"></i> ' . $mt->_("Back"), 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Back"))) ?>
+        </div>
+        <div class="pull-right">
+            <?php echo $this->tag->linkTo(array("academy/edit/" . $academy->academy_id, '<i class="fa fa-plus"></i> ' . $t->_("Edit Academy"), 'class' => 'btn btn-primary', 'rel' => 'tooltip', 'title' => $t->_("Edit Academy"))) ?>
+            <a href="#modalDeleteConfirm" role="button" class="btn" rel="tooltip" title="<?php echo $mt->_("Delete") ?>" data-original-title="<?php echo $mt->_("Delete")?>" data-toggle="modal" onclick="deleteConfirm('<?php echo $academy_id ?>', '<?php echo $name ?>')"><?php echo $mt->_("Delete")?> <i class="fa fa-trash-o"></i></a>
+        </div>
+    </div>
+</div>
+<?php endif ?>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-user"></i>
+                    <?php echo $mt->_("Profile"); ?>
+                </h3>
+            </div>
+            <div class="box-content">
+                <address id="academyDetail">
+                     <strong><?php echo $t->_("School") . $academy->name ?></strong>
+                        <br><?php echo $academy->address ?>
+                        <br><?php echo $academy->subdistrict_prefix ?><?php echo $academy->subdistrict_name ?> <?php echo $academy->district_prefix ?><?php echo $academy->district_name ?> <?php echo $t->_("Province"); ?><?php echo $academy->province_name ?> <?php echo $academy->zipcode ?>
+                        <br><abbr title='Phone'><?php echo $t->_("Telephone"); ?>:</abbr> <?php echo $academy->telephone ?>
+                        <br><abbr title='Fax'><?php echo $t->_("Fax"); ?>:</abbr> <?php echo $academy->zipcode ?>
+                </address>
+                    
+                <dl>
+                    <dt><?php echo $mt->_("Email"); ?></dt>
+                    <dd><?php echo $academy->email; ?></dd>
+
+                    <dt><?php echo $mt->_("Website"); ?></dt>
+                    <dd><?php echo $academyMeta['website']; ?></dd>
+
+                    <dt><?php echo $mt->_("Image"); ?></dt>
+                    <dd>
+                        <ul class="gallery">
+                            <li>
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 180px;">
+                                        <a href="#">
+                                        <?php echo $this->tag->image(array($academyMeta['image'])); ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="extras">
+                                    <div class="extras-inner">
+                                        <?php echo $this->tag->linkTo(array($academyMeta['image'], '<i class="fa fa-search"></i> ', 'class' => 'colorbox-image', 'rel' => 'group-1')) ?>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-info"></i>
+                    <?php echo $t->_("be a Member with"); ?>
+                </h3>
+            </div>
+            <div class="box-content">
+                <?php echo $academy->area->name; ?>
+                <dl>
+                    <dt><?php echo $t->_("Division"); ?></dt>
+                    <dd><?php echo $divisionName; ?></dd>
+
+                    <dt><?php echo $t->_("SMIS Code"); ?></dt>
+                    <dd><?php echo $academy->smis_code; ?></dd>
+
+                    <dt><?php echo $t->_("Ministry Code"); ?></dt>
+                    <dd><?php echo $academy->ministry_code; ?></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-info"></i>
+                    <?php echo $mt->_("Information"); ?>
+                </h3>
+            </div>
+            <div class="box-content">
+                <dl>
+                    <dt><?php echo $t->_("Middle School"); ?></dt>
+                    <dd>
+                       <?php echo $academyMeta['student-middle'] ?>
+                    </dd>
+                    <dt><?php echo $t->_("High School"); ?></dt>
+                    <dd>
+                        <?php echo $academyMeta['student-high'] ?>
+                    </dd>
+                    <dt><?php echo $mt->_("EP"); ?></dt>
+                    <dd>
+                        <?php echo $academyMeta['student-ep'] ?>
+                    </dd>
+                    <dt><?php echo $mt->_("MEP"); ?></dt>
+                    <dd>
+                        <?php echo $academyMeta['student-mep'] ?>
+                    </dd>
+                    <dt><?php echo $mt->_("Gifted"); ?></dt>
+                    <dd>
+                        <?php echo $academyMeta['student-gifted'] ?>
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php $this->partial("academy/partials/modalDeleteConfirm", array('title' => 'Delete Academy', 'size' => 'big')) ?>

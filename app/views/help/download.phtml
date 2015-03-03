@@ -1,0 +1,65 @@
+<?php $this->partial("common/partials/page-header", array('title' => $t->_('Download'), 'size' => 'big')) ?>
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-list"></i>
+                    <?php echo $mt->_("Download") ?>
+                </h3>
+            </div>
+            <div class="box-content">
+
+                    <div class="search-results">
+                        <ul>
+                            <li>
+                            <div class="thumbnail">
+                                <a href="../../download/manual.pdf" target="_blank">
+                                    <button class="btn btn-primary"><i class="icon-cog"></i> 
+                                    <?php echo $mt->_("Download") ?></button></a>
+                                    </div>
+                                <div class="search-info">
+                                    <a href="../../download/manual.pdf" target="_blank">คู่มือการใช้งาน</a>
+                                    <p>คู่มือการใช้งานระบบสมาชิก มีภาพประกอบ แบ่งตามหัวข้อดังนี้ <br>
+                                    1. วิธีเข้าสู่ระบบ<br>
+                                    2. วิธีสร้างข้อมูลสมาชิกใหม่<br>
+                                    3. วิธีค้นหาค้นหาขั้นต้น<br>
+                                    4. วิธีค้นหาค้นหาขั้นสูง<br>
+                                    5. วิธีแก้ไขข้อมูลสมาชิก<br>
+                                    6. วิธีลบข้อมูลสมาชิก<br>
+                                    7. วิธีดูข้อมูลสมาชิก<br>
+                                    </p>
+                                </div>
+                            </li>
+
+                            <li>
+                            <div class="thumbnail">
+                                <a href="../../download/membership.pdf" target="_blank">
+                                    <button class="btn btn-primary"><i class="icon-cog"></i> 
+                                    <?php echo $mt->_("Download") ?></button></a>
+                                    </div>
+                                <div class="search-info">
+                                    <a href="../../download/membership.pdf" target="_blank">ใบกรอกข้อมูลสมาชิก</a>
+                                    <p>ใบกรอกข้อมูลสมาชิก ใช้เพื่อบันทึกข้อมูลประวัติสมาชิก เพื่อผู้อำนวยการจังหวัด นำไปกรอกข้อมูลในระบบ </p>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

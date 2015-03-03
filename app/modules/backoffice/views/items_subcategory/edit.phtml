@@ -1,0 +1,80 @@
+<?php $this->partial("../../../views/common/partials/page-header", array('title' => $t->_("Edit Items Subcategory"), 'size' => 'big')) ?>
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="pull-left">
+            <?php echo $this->tag->linkTo(array("settings/items_subcategory", '<i class="fa fa-reply"></i> ' . $mt->_("Back"), 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Back"))) ?>
+        </div>
+
+        <div class="pull-right">
+            <a href="#modalDeleteConfirm" role="button" class="btn" rel="tooltip" title="<?php echo $mt->_("Delete") ?>" data-original-title="<?php echo $mt->_("Delete")?>" data-toggle="modal" onclick="deleteConfirm('<?php echo $subcat_id ?>', '<?php echo $name ?>')"><?php echo $mt->_("Delete")?> <i class="fa fa-trash-o"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-bars"></i>
+                    <?php echo $t->_("Items Subcategory"); ?>
+                </h3>
+            </div>
+            <div class="box-content nopadding">
+                <?php echo $this->tag->form(array("settings/items_subcategory/save", "method" => "post", "class" => "form-horizontal form-column form-bordered", 'enctype' => 'multipart/form-data')) ?>
+                    <div class="form-group">
+                        <label for="type" class="control-label col-sm-2">
+                            <?php echo $t->_("Item Type"); ?>
+                            <small><?php echo $t->_("Item Type Description"); ?></small>
+                        </label>
+                        <div class="col-sm-10">
+                            <?php echo $form->render("type_id") ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cat" class="control-label col-sm-2">
+                            <?php echo $t->_("Item Category"); ?>
+                            <small><?php echo $t->_("Item Category Description"); ?></small>
+                        </label>
+                        <div class="col-sm-10">
+                            <?php echo $form->render("cat_id") ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="code" class="control-label col-sm-2">
+                            <?php echo $t->_("Subcategory Code"); ?>
+                            <small><?php echo $t->_("Item Subcategory Code Description"); ?></small>
+                        </label>
+                        <div class="col-sm-10">
+                            <?php echo $form->render("code") ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="control-label col-sm-2">
+                            <?php echo $t->_("Subcategory Name"); ?>
+                            <small><?php echo $t->_("Item Subcategory Name Description"); ?></small>
+                        </label>
+                        <div class="col-sm-10">
+                            <?php echo $form->render("name") ?>
+                        </div>
+                    </div>
+                    <div class="form-actions pull-right">
+                        <?php echo $this->tag->hiddenField("subcat_id") ?>
+                        <?php echo $this->tag->submitButton(array($mt->_("Save Changes"), 'class' => 'btn btn-primary')) ?>
+                        <?php echo $this->tag->linkTo(array("settings/items_subcategory", $mt->_("Cancel"), 'class' => 'btn')) ?>
+                    </div>
+                </form>
+            </div><!--box-content-->
+        </div>
+    </div>
+</div>
+
+<?php $this->partial("items_subcategory/partials/modalDeleteConfirm", array('title' => $t->_("Delete Items Subcategory"), 'size' => 'big')) ?>

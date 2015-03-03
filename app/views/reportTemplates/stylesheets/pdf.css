@@ -1,0 +1,505 @@
+/* line 17, ../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+/* line 22, ../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1; }
+
+/* line 24, ../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none; }
+
+/* line 26, ../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 28, ../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+/* line 30, ../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none; }
+  /* line 103, ../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+/* line 32, ../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none; }
+
+/* line 116, ../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block; }
+
+/* line 23, ../sass/pdf.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  font: "THSarabun";
+  line-height: 16.5px; }
+
+/* line 27, ../sass/pdf.scss */
+body {
+  font-size: 1em; }
+
+@page {
+  margin: 25px; }
+
+/* line 40, ../sass/pdf.scss */
+table {
+  font-size: 1em;
+  width: 100%;
+  border: solid 0.5px;
+  border-spacing: 0; }
+
+/* line 47, ../sass/pdf.scss */
+table {
+  border-collapse: collapse; }
+
+/* line 48, ../sass/pdf.scss */
+th, .thead {
+  text-align: center;
+  font-weight: bold; }
+
+/* line 49, ../sass/pdf.scss */
+h2 {
+  margin: 0; }
+
+/* line 50, ../sass/pdf.scss */
+td, th {
+  padding: 0 2px; }
+
+/* line 51, ../sass/pdf.scss */
+th {
+  font-size: 1.1em; }
+
+/*DL, DT, DD TAGS LIST DATA*/
+/* line 54, ../sass/pdf.scss */
+dl {
+  margin-bottom: 50px; }
+
+/* line 58, ../sass/pdf.scss */
+dl dt {
+  clear: both;
+  float: left;
+  font-weight: bold;
+  margin-right: 10px;
+  padding: 0px;
+  border: solid 1px; }
+
+/* line 66, ../sass/pdf.scss */
+dl dd {
+  float: left;
+  margin: 0;
+  padding: 0;
+  display: block;
+  /*border: solid 1px;*/
+  border-bottom: dotted; }
+
+/* line 75, ../sass/pdf.scss */
+ol {
+  margin: 0 0 0 5px;
+  padding: 0;
+  list-style-type: decimal; }
+
+/* line 83, ../sass/pdf.scss */
+ol li {
+  margin: 8px 0 0 0;
+  padding: 0 0 0 0; }
+
+/* line 89, ../sass/pdf.scss */
+hr {
+  border: none;
+  height: 1px;
+  /* Set the hr color */
+  color: #000;
+  background-color: #000;
+  margin: 0;
+  padding: 0; }
+
+/* line 99, ../sass/pdf.scss */
+.box td, .box th {
+  border: solid 0.5px;
+  padding: 0 4px;
+  border-spacing: 0;
+  margin: 0; }
+
+/* line 106, ../sass/pdf.scss */
+.non-box {
+  border: none;
+  padding: 0 4px;
+  border-spacing: 0;
+  margin: 0; }
+
+/* line 112, ../sass/pdf.scss */
+.non-box tr td {
+  border: none; }
+
+/* line 115, ../sass/pdf.scss */
+.non-box-top {
+  border-top: none !important; }
+
+/* line 119, ../sass/pdf.scss */
+.underline {
+  border-bottom: dotted 1px; }
+
+/* line 123, ../sass/pdf.scss */
+.text-center {
+  text-align: center; }
+
+/* line 126, ../sass/pdf.scss */
+.dot {
+  border-bottom: dotted 1px !important;
+  padding-bottom: 5px; }
+
+/* line 130, ../sass/pdf.scss */
+.dot-underline {
+  border-bottom: 1px dotted #000 !important;
+  padding-left: 40px;
+  padding-right: 40px; }
+
+/* line 135, ../sass/pdf.scss */
+.block-center {
+  display: block;
+  width: 100%;
+  text-align: center; }
+
+/* Typography */
+/* line 142, ../sass/pdf.scss */
+.title {
+  font-size: 21px;
+  font-weight: bold; }
+
+/* line 143, ../sass/pdf.scss */
+.normal, .d-title-normal {
+  font-weight: normal; }
+
+/* line 144, ../sass/pdf.scss */
+.xs {
+  font-size: 12px; }
+
+/* line 145, ../sass/pdf.scss */
+.s {
+  font-size: 13px; }
+
+/* line 146, ../sass/pdf.scss */
+.m {
+  font-size: 0.813em; }
+
+/* line 147, ../sass/pdf.scss */
+.b {
+  font-weight: bold; }
+
+/* line 148, ../sass/pdf.scss */
+.xm {
+  font-size: 16px; }
+
+/* line 149, ../sass/pdf.scss */
+.l {
+  font-size: 18px; }
+
+/* line 150, ../sass/pdf.scss */
+.xb {
+  font-size: 20px; }
+
+/* line 151, ../sass/pdf.scss */
+.xxb {
+  font-size: 22px; }
+
+/* line 152, ../sass/pdf.scss */
+.xl {
+  font-size: 24px; }
+
+/* line 153, ../sass/pdf.scss */
+.xlb {
+  font-size: 26px; }
+
+/* line 154, ../sass/pdf.scss */
+.xxl {
+  font-size: 30px; }
+
+/* line 155, ../sass/pdf.scss */
+.xxxl {
+  font-size: 34px; }
+
+/* line 157, ../sass/pdf.scss */
+.pos-a {
+  position: absolute; }
+
+/* line 158, ../sass/pdf.scss */
+strong, b {
+  font-weight: bold; }
+
+/* line 162, ../sass/pdf.scss */
+.rotate {
+  display: block;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  /* Should be unset in IE9+ I think. */
+  margin: 0;
+  padding: 0;
+  line-height: 8px;
+  text-align: center; }
+
+/* line 192, ../sass/pdf.scss */
+.table {
+  display: table; }
+
+/* line 196, ../sass/pdf.scss */
+.tr {
+  display: table-row;
+  float: left; }
+
+/* line 200, ../sass/pdf.scss */
+.fill-form {
+  width: 100%;
+  display: table;
+  float: left;
+  margin: 5px; }
+
+/* line 205, ../sass/pdf.scss */
+.fill-form-2col-full {
+  width: 52%;
+  float: left;
+  margin: 0; }
+
+/* line 208, ../sass/pdf.scss */
+.fill-form-2col {
+  width: 46%;
+  float: left;
+  margin: 0; }
+
+/* line 211, ../sass/pdf.scss */
+.fill-form-1col {
+  width: 93%;
+  float: left;
+  margin: 0; }
+
+/* line 214, ../sass/pdf.scss */
+.d-title, .d-title-normal {
+  display: table-cell; }
+
+/* line 217, ../sass/pdf.scss */
+.d-title {
+  font-weight: bold; }
+
+/* line 220, ../sass/pdf.scss */
+.d-detail {
+  width: 100%;
+  display: table-cell;
+  border-bottom: 1px dotted black;
+  padding-left: 10px;
+  margin-top: -2px;
+  line-height: 15.5px; }
+
+/*  Layout  */
+/* line 232, ../sass/pdf.scss */
+.wx10 {
+  width: 10%; }
+
+/* line 233, ../sass/pdf.scss */
+.wx15 {
+  width: 15%; }
+
+/* line 234, ../sass/pdf.scss */
+.wx20 {
+  width: 20%; }
+
+/* line 235, ../sass/pdf.scss */
+.wx30 {
+  width: 30%; }
+
+/* line 236, ../sass/pdf.scss */
+.wx40 {
+  width: 40%; }
+
+/* line 237, ../sass/pdf.scss */
+.wx50 {
+  width: 50%; }
+
+/* line 238, ../sass/pdf.scss */
+.wx60 {
+  width: 60%; }
+
+/* line 239, ../sass/pdf.scss */
+.wx70 {
+  width: 70%; }
+
+/* line 240, ../sass/pdf.scss */
+.wx80 {
+  width: 80%; }
+
+/* line 241, ../sass/pdf.scss */
+.wx90 {
+  width: 90%; }
+
+/* line 242, ../sass/pdf.scss */
+.wx100 {
+  width: 100%; }
+
+/* line 244, ../sass/pdf.scss */
+.wp5 {
+  width: 5%; }
+
+/* line 245, ../sass/pdf.scss */
+.wp10 {
+  width: 10%; }
+
+/* line 246, ../sass/pdf.scss */
+.wp15 {
+  width: 15%; }
+
+/* line 247, ../sass/pdf.scss */
+.wp20 {
+  width: 20%; }
+
+/* line 248, ../sass/pdf.scss */
+.wp30 {
+  width: 30%; }
+
+/* line 249, ../sass/pdf.scss */
+.wp40 {
+  width: 40%; }
+
+/* line 250, ../sass/pdf.scss */
+.wp50 {
+  width: 50%; }
+
+/* line 251, ../sass/pdf.scss */
+.wp60 {
+  width: 60%; }
+
+/* line 252, ../sass/pdf.scss */
+.wp70 {
+  width: 70%; }
+
+/* line 253, ../sass/pdf.scss */
+.wp80 {
+  width: 80%; }
+
+/* line 254, ../sass/pdf.scss */
+.wp90 {
+  width: 90%; }
+
+/* line 255, ../sass/pdf.scss */
+.wp100 {
+  width: 100%; }
+
+/* line 257, ../sass/pdf.scss */
+.wp5, .wp10, .wp15, .wp20, .wp30, .wp40, .wp50, .wp60, .wp70, .wp80, .wp90, .wp100 {
+  display: block; }
+
+/* line 259, ../sass/pdf.scss */
+.clearfix:after {
+  content: " ";
+  /* Older browser do not support empty content */
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both; }
+
+/* line 267, ../sass/pdf.scss */
+.photo-area {
+  float: right;
+  display: block;
+  clear: both; }
+
+/* line 273, ../sass/pdf.scss */
+#content {
+  margin: 0 auto;
+  padding: 20px 20px 0 20px;
+  width: 100%; }
+
+/* line 278, ../sass/pdf.scss */
+#contentainer {
+  margin: 0 auto;
+  padding: 20px 20px 0 20px;
+  width: 100%; }
+
+/* Old Style */
+/* line 287, ../sass/pdf.scss */
+#centerColumn {
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+  text-align: left;
+  vertical-align: middle;
+  background-color: #ffffff;
+  /*border:1px solid #cccccc;*/ }
+
+/* line 298, ../sass/pdf.scss */
+#header {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  /*background-color: orange;*/
+  text-align: center; }
+
+/* line 299, ../sass/pdf.scss */
+#footer {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  height: 150px;
+  background-color: lightblue; }
+
+/* line 300, ../sass/pdf.scss */
+.page:after {
+  content: counter(page); }
+
+/* line 301, ../sass/pdf.scss */
+#header.landscape {
+  height: 150px;
+  opacity: 0.2; }
+
+/* line 308, ../sass/pdf.scss */
+#cer #content {
+  font: "BookRluX"; }
+
+/* line 314, ../sass/pdf.scss */
+#pond {
+  display: inline; }

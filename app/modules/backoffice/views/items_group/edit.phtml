@@ -1,0 +1,62 @@
+<?php $this->partial("../../../views/common/partials/page-header", array('title' => $t->_("Edit Items Group"), 'size' => 'big')) ?>
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="pull-left">
+            <?php echo $this->tag->linkTo(array("settings/items_group", '<i class="fa fa-reply"></i> ' . $mt->_("Back"), 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Back"))) ?>
+        </div>
+
+        <div class="pull-right">
+            <a href="#modalDeleteConfirm" role="button" class="btn" rel="tooltip" title="<?php echo $mt->_("Delete") ?>" data-original-title="<?php echo $mt->_("Delete")?>" data-toggle="modal" onclick="deleteConfirm('<?php echo $group_id ?>', '<?php echo $name ?>')"><?php echo $mt->_("Delete")?> <i class="fa fa-trash-o"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-bars"></i>
+                    <?php echo $t->_("Items Group"); ?>
+                </h3>
+            </div>
+            <div class="box-content nopadding">
+                <?php echo $this->tag->form(array("settings/items_group/save", "method" => "post", "class" => "form-horizontal form-column form-bordered", 'enctype' => 'multipart/form-data')) ?>
+                    <div class="form-group">
+                        <label for="code" class="control-label col-sm-2">
+                            <?php echo $t->_("Group Code"); ?>
+                            <small><?php echo $t->_("Item Group Code Description"); ?></small>
+                        </label>
+                        <div class="col-sm-10">
+                            <?php echo $form->render("code") ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="control-label col-sm-2">
+                            <?php echo $t->_("Group Name"); ?>
+                            <small><?php echo $t->_("Item Group Name Description"); ?></small>
+                        </label>
+                        <div class="col-sm-10">
+                            <?php echo $form->render("name") ?>
+                        </div>
+                    </div>
+                    <div class="form-actions pull-right">
+                        <?php echo $this->tag->hiddenField("group_id") ?>
+                        <?php echo $this->tag->submitButton(array($mt->_("Save Changes"), 'class' => 'btn btn-primary')) ?>
+                        <?php echo $this->tag->linkTo(array("settings/items_group", $mt->_("Cancel"), 'class' => 'btn')) ?>
+                    </div>
+                </form>
+            </div><!--box-content-->
+        </div>
+    </div>
+</div>
+
+<?php $this->partial("items_group/partials/modalDeleteConfirm", array('title' => $t->_("Delete Items Group"), 'size' => 'big')) ?>

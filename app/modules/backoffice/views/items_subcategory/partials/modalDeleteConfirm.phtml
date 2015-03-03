@@ -1,0 +1,30 @@
+<div id="modalDeleteConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"><?php echo $mt->_("Delete Confirmation"); ?></h4>
+            </div>
+            <!-- /.modal-header -->
+            <div class="modal-body">
+                <p><?php echo $mt->_("Are you sure you want to delete?"); ?> </p>
+                <p id="deleteTitle"></p>
+            </div>
+            <!-- /.modal-body -->
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true"><?php echo $mt->_("No"); ?></button>
+                <?php echo $this->tag->linkTo(array('#', $mt->_("Yes"), 'class' => 'btn btn-primary', 'id' => 'deleteID')); ?>
+            </div>
+            <!-- /.modal-footer -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+        function deleteConfirm(id, title){
+            $('#deleteID').attr("href", '<?php echo $baseUri ?>settings/items_subcategory/delete/' + id)
+            $('#deleteTitle').html(title)
+        }
+</script>

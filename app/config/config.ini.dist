@@ -1,0 +1,35 @@
+[database]
+adapter  = Mysql
+host     = localhost
+username = {USERNAME}
+password = {PASSWORD}
+dbname   = {DBNAME}
+
+
+[application]
+controllersDir = ../app/controllers/
+modelsDir      = ../app/models/
+viewsDir       = ../app/views/
+pluginsDir     = ../app/plugins/
+libraryDir     = ../app/library/
+cacheDir       = ../app/cache/
+messageDir     = ../app/messages/
+formsDir       = ../app/forms/
+logsDir        = ../logs/
+baseUri        = /
+cryptSalt      = "eEAfR|_&G&f,+vU]:jFr!!A&+71w1Ms9~8_4L!<@[N@DyaIP_2My|:+.u>/6m,$D"
+version        = '0.2';
+
+
+[mail]
+fromName       = Phoenix
+fromEmail      = phoenix@phoenix.com
+server         = 'smtp.gmail.com'
+port           = 587
+security       = 'tls'
+username       = ''
+password       = ''
+
+
+[models]
+metadata.adapter = "Memory"

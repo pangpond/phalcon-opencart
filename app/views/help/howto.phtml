@@ -1,0 +1,70 @@
+<?php $this->partial("common/partials/page-header", array('title' => $t->_('How to'), 'size' => 'big')) ?>
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-list"></i>
+                    <?php echo $t->_('How to') ?>
+                </h3>
+            </div>
+            <div class="box-content">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>ชั้นตอนการกรอกข้อมูล</h4>
+                        <ul class="gallery">
+                            <li>
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput">
+                                        <a href="#">
+                                        <?php echo $this->tag->image(array("img/howto.png", 'class' => "img-responsive")); ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="extras">
+                                    <div class="extras-inner">
+                                        <?php echo $this->tag->linkTo(array('img/howto.png', '<i class="fa fa-search"></i> ', 'class' => 'colorbox-image', 'rel' => 'group-1')) ?>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>&nbsp;</h4>
+                        <ol>
+                            <li>เข้าไปที่เว็บไซต์ members.saat.or.th</li>
+                            <li>คลิกเมนูเพิ่มสมาชิก ทางด้านซ้ายของเว็บไซต์</li>
+                            <li>เลือกสถานศึกษาของสมาชิกที่จะกรอกข้อมูล</li>
+                            <li>กรอกข้อมูลสมาชิกให้ครบถ้วน</li>
+                        </ol>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>ข้อควรระวัง</h4>
+                        <ul>
+                            <li>IE เวอร์ชั่นขั้นต่ำที่รองรับ คือ เวอร์ชั่น 9 ขึ้นไป</li>
+                            <li>Firefox เวอร์ชั่นขั้นต่ำที่รองรับ คือ 30 ขึ้นไป </li>
+                            <li>Chrome เวอร์ชั่นขั้นต่ำที่รองรับ คือ 27 ขึ้นไป </li>
+                            <li>Safari เวอร์ชั่นขั้นต่ำที่รองรับ คือ 5.1 ขึ้นไป </li>
+                            <li>
+                            แนะนำให้ใช้ Google Chrome 
+                            <a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank"> 
+                            <?php echo Phalcon\Tag::image(array("img/demo/chrome-icon.png", "width" => "32")) . "ดาวน์โหลดที่นี่"; ?> </a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

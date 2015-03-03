@@ -1,0 +1,110 @@
+<?php $this->partial("../../../views/common/partials/page-header", array('title' => $t->_("Tools"), 'size' => 'big')) ?>
+
+<?php echo $this->getContent() ?>
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-edit"></i><?php echo $t->_("Import from template file") ?></h3>
+            </div>
+            <div class="box-content">
+                <?php echo $this->tag->form(array("tools/index/import", "method" => "post", "class" => "form-horizontal", 'enctype' => 'multipart/form-data')) ?>
+                    <div class="form-group">
+                        <label for="file" class="control-label col-sm-2"><?php echo $t->_("Data File") ?>
+                            <small><?php echo $t->_("Choose a template file from your computer") ?></small>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="file" name="file" id="file" class="form-control">
+                            <span class="help-block"><?php echo $t->_("Only .xls (Max Size: 10MB)") ?></span>
+                        </div>
+                    </div>
+                    <div class="form-actions pull-left">
+                        <?php echo $this->tag->hiddenField(array("type", 'id' => 'type', 'value' => 'template')) ?>
+                        <button type="submit" class="btn btn-primary"><?php echo $t->_("Start Import Template") ?></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-edit"></i><?php echo $t->_("Import data") ?></h3>
+            </div>
+            <div class="box-content">
+                <div class="form-actions pull-left">
+                    <?php echo $this->tag->hiddenField(array("type", 'id' => 'type', 'value' => 'cleardata')) ?>
+
+                    <a href="#modalClearDataConfirm" role="button" class="btn" rel="tooltip" title="<?php echo $mt->_("Clear Data") ?>" data-original-title="<?php echo $mt->_("Delete")?>" data-toggle="modal"><i class="fa fa-trash-o"></i> <?php echo $t->_("Clear Data")?> </a>
+
+                    <a href="/tools/bigdump.php" target="_blank" class="btn btn-primary"><strong><?php echo $t->_("Start Import Data") ?></strong></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-edit"></i><?php echo $t->_("Backup data") ?></h3>
+            </div>
+            <div class="box-content">
+                <?php echo $this->tag->form(array("tools/index/export", "method" => "post", "class" => "form-horizontal", 'enctype' => 'multipart/form-data')) ?>
+                    <div class="form-actions pull-left">
+                        <?php echo $this->tag->hiddenField(array("type", 'id' => 'type', 'value' => 'backup')) ?>
+                        <button type="submit" class="btn btn-primary" ><?php echo $t->_("Start Backup Database") ?></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-edit"></i><?php echo $t->_("Import from database file") ?></h3>
+            </div>
+            <div class="box-content">
+                <?php echo $this->tag->form(array("tools/index/import", "method" => "post", "class" => "form-horizontal", 'enctype' => 'multipart/form-data')) ?>
+                    <div class="form-group">
+                        <label for="file" class="control-label col-sm-2"><?php echo $t->_("Data File") ?>
+                            <small><?php echo $t->_("Choose a file from your computer") ?></small>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="file" name="file" id="file" class="form-control">
+                            <span class="help-block"><?php echo $t->_("Only .sql (Max Size: 10MB)") ?></span>
+                        </div>
+                    </div>
+                    <div class="form-actions pull-right">
+                        <?php echo $this->tag->hiddenField(array("type", 'id' => 'type', 'value' => 'database')) ?>
+                        <button type="submit" class="btn btn-primary"  disabled><?php echo $t->_("Start Import Database") ?></button>
+                        <button type="button" class="btn"><?php echo $t->_("Cancel") ?></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+
+<?php $this->partial("index/partials/modalClearDataConfirm", array('title' => $t->_("Delete Items Type"), 'size' => 'big')) ?>

@@ -1,0 +1,275 @@
+<?php use Phoenix\Models\Province; ?>
+
+<?php $this->partial("common/partials/page-header", array('title' => $t->_("Create Members"), 'size' => 'big')) ?>
+
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="pull-left">
+            <?php echo $this->tag->linkTo(array("members", '<i class="fa fa-reply"></i> ' . $mt->_("Back"), 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Back"))) ?>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-bars"></i>
+                    <?php echo $t->_("Members"); ?>
+                </h3>
+                <ul class="tabs">
+                    <li class="active">
+                        <a href="#tab-account" data-toggle="tab"><?php echo $mt->_("Account"); ?></a>
+                    </li>
+                    <li>
+                        <a href="#tab-info" data-toggle="tab"><?php echo $mt->_("Information"); ?></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="box-content" style="padding:0;">
+                <?php echo $this->tag->form(array("members/create", "method" => "post", "class" => "form-vertical form-column form-bordered", 'enctype' => 'multipart/form-data')) ?>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-account">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!--First Tab-->
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="textfield" class="control-label"><?php echo $t->_("Username"); ?></label>
+                                                <?php echo $form->render("username") ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textfield" class="control-label"><?php echo $t->_("Display Name"); ?></label>
+                                                <?php echo $form->render("display_name") ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textfield" class="control-label"><?php echo $t->_("Member Code"); ?></label>
+                                                <?php echo $form->render("member_code") ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textfield" class="control-label"><?php echo $mt->_("Status"); ?></label>
+                                                <div class="row">
+                                                    <div class="check-line col-sm-6">
+                                                        <?php echo Phalcon\Tag::radioField(array("status", "value" => "1", 'class' => 'icheck-me', 'data-skin' => 'square', 'data-color' => 'blue', 'id' => 'active'))?> 
+                                                        <label class='inline' for="active"><?php echo $mt->_("Active"); ?></label>
+                                                    </div>
+                                                    <div class="check-line col-sm-6">
+                                                        <?php echo Phalcon\Tag::radioField(array("status", "value" => "0", 'class' => 'icheck-me', 'data-skin' => 'square', 'data-color' => 'blue', 'id' => 'inactive'))?> 
+                                                        <label class='inline' for="inactive"><?php echo $mt->_("Inactive"); ?></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textfield" class="control-label"><?php echo $t->_("Registered"); ?>
+                                                    <small><?php echo $mt->_("Format Date"); ?></small>
+                                                </label>
+                                                 <div class="input-group">
+                                                    <?php echo $this->tag->textField(array("registered", "size" => 30, 'class' => 'form-control datepick', 'data-date-formataa' => 'yyyy-mm-dd 00:00:00')) ?>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-right">
+                                            <div class="form-group">
+                                                <label for="password" class="control-label"><?php echo $mt->_("Password"); ?></label>
+                                                <?php echo $form->render("password") ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textfield" class="control-label"><?php echo $t->_("Member Type"); ?></label>
+
+                                                <?php echo $form->render("member_type") ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textfield" class="control-label"><?php echo $t->_("Title"); ?></label>
+                                                <?php echo $form->render("title") ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textfield" class="control-label"><?php echo $t->_("Firstname"); ?></label>
+                                                <?php echo $form->render("firstname") ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textfield" class="control-label"><?php echo $t->_("Lastname"); ?></label>
+                                                <?php echo $form->render("lastname") ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-actions pull-right">
+                                                <?php echo $this->tag->hiddenField("member_id") ?>
+                                                <?php echo $this->tag->submitButton(array($mt->_("Create Account"), 'class' => 'btn btn-primary')) ?>
+                                                <?php echo $this->tag->linkTo(array("members", $mt->_("Cancel"), 'class' => 'btn')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--tab-account-->
+
+                        <div class="tab-pane" id="tab-info">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!--Second Tab-->
+                                    <div class="row">
+                                        <div class="col-sm-6 col-left">
+                                            <div class="form-group">
+                                                <label for="email" class="control-label"><?php echo $t->_("Email"); ?></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">@</span>
+                                                    <?php echo $this->tag->emailField(array("meta[email]", "size" => 30, 'class' => 'form-control', 'id' => 'email')) ?>
+                                                </div> 
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="birthdate" class="control-label"><?php echo $t->_("Birthdate"); ?>
+                                                    <small><?php echo $mt->_("Format Date"); ?></small>
+                                                </label>
+                                                <div class="input-group">
+                                                    <?php echo $this->tag->textField(array("meta[birthdate]", "size" => 30, 'class' => 'form-control datepick', 'id' => 'birthdate')) ?>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div> 
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address" class="control-label"><?php echo $t->_("Address"); ?></label>
+                                                <?php echo $this->tag->textField(array("meta[address]", "size" => 30, 'class' => 'form-control', 'id' => 'address')) ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="district" class="control-label"><?php echo $t->_("District"); ?></label>
+                                                <?php echo $this->tag->textField(array("meta[district]", "size" => 30, 'class' => 'form-control', 'id' => 'district')) ?>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="telephone" class="control-label"><?php echo $t->_("Telephone"); ?>
+                                                    <small><?php echo $mt->_("Format Telephone"); ?></small>
+                                                </label>
+                                                <?php echo $this->tag->telField(array("meta[telephone]", "size" => 30, 'class' => 'form-control mask_telephone', 'id' => 'telephone')) ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 250px; height: 151px;">
+                                                    <?php echo $this->tag->image($memberMeta['image']); ?>
+                                                    </div>
+                                                    <div>
+                                                        <span class="btn btn-default btn-file">
+                                                            <span class="fileinput-new"><?php echo $mt->_("Select image"); ?></span>
+                                                        <span class="fileinput-exists"><?php echo $mt->_("Change"); ?></span>
+                                                        <?php echo $this->tag->fileField(array("image", 'id' => 'image')) ?>
+                                                        </span>
+                                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput"><?php echo $mt->_("Remove"); ?></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-right">
+                                            <div class="form-group">
+                                                <label for="citizen_id" class="control-label"><?php echo $t->_("Citizen Id"); ?>
+                                                    <small><?php echo $mt->_("Format Citizen"); ?></small>
+                                                </label>
+                                                <?php echo $this->tag->textField(array("meta[citizen_id]", "size" => 30, 'class' => 'form-control mask_citizen', 'id' => 'citizen_id')) ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="gender" class="control-label"><?php echo $t->_("Gender"); ?></label>
+                                                <?php echo $this->tag->selectStatic(array("meta[gender]", 
+                                                        'class' => 'form-control', 
+                                                        array("Male" => "Male", "Female" => "Female"),
+                                                        'useEmpty' => true,
+                                                        'emptyText' => $mt->_('Please, choose one...'),
+                                                        'id' => 'gender',
+                                                    )) ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="province" class="control-label"><?php echo $t->_("Province"); ?></label>
+
+                                                <?php 
+                                                    echo Phalcon\Tag::select(array(
+                                                        'meta[province]',
+                                                        Province::find(),
+                                                        "using" => array("province_id", "province_name"),
+                                                        'useEmpty' => true,
+                                                        'emptyText' => $mt->_('Please, choose one...'),
+                                                        'class' => 'form-control',
+                                                        'id' => 'province',
+                                                    ));
+                                                 ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="zipcode" class="control-label"><?php echo $t->_("Zipcode"); ?></label>
+                                                <?php echo $this->tag->textField(array("meta[zipcode]", "size" => 30, 'class' => 'form-control', 'id' => 'zipcode')) ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="expire" class="control-label"><?php echo $t->_("Expire"); ?>
+                                                    <small><?php echo $mt->_("Format Date"); ?></small>
+                                                </label>
+                                                <div class="input-group">
+                                                    <?php echo $this->tag->textField(array("meta[expire]", "size" => 30, 'class' => 'form-control datepick', 'id' => 'expire')) ?>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div> 
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <label for="class" class="control-label"><?php echo $t->_("Class"); ?></label>
+                                                        <?php echo $form->render("meta[section-class]") ?>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label for="room" class="control-label"><?php echo $t->_("Room"); ?></label>
+                                                        <?php echo $form->render("meta[section-room]") ?>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label for="position" class="control-label"><?php echo $t->_("Position"); ?></label>
+                                                        <?php echo $this->tag->textField(array("meta[section-position]", "size" => 30, 'class' => 'form-control')) ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="note" class="control-label"><?php echo $t->_("Note"); ?></label>
+                                                <?php echo $this->tag->textArea(array("meta[note]", "size" => 30, 'rows' => '3', 'class' => 'form-control', 'id' => 'note')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-actions pull-right">
+                                                <?php echo $this->tag->hiddenField("member_id") ?>
+                                                <?php echo $this->tag->submitButton(array($mt->_('Save Changes'), 'class' => 'btn btn-primary')) ?>
+                                                <?php echo $this->tag->linkTo(array("members", $mt->_('Cancel'), 'class' => 'btn')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--tab-info-->
+                    </div>
+                </form>
+            </div><!--box-content-->
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        if ($('.datepick').length > 0) {
+            $('.datepick').datetimepicker({ 
+                format: 'YYYY-MM-DD hh:mm:ss' 
+            });
+        }
+    });
+</script>

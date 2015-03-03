@@ -1,0 +1,10 @@
+.DS_Store
+config/config.inc.php
+vendor/
+app/cache/
+app/config/config.ini
+composer.lock
+public/tools/backup/
+.com.apple.timemachine.supported
+.smbdeleteAAA12e55b4
+logs/access.log

@@ -1,0 +1,48 @@
+
+<?php $this->partial("common/partials/page-header", array('title' => $t->_("Edit Event"), 'size' => 'big')) ?>
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="pull-left">
+            <?php echo $this->tag->linkTo(array("events", '<i class="fa fa-reply"></i> ' . $mt->_("Back"), 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Back"))) ?>
+        </div>
+
+        <div class="pull-right">
+            <a href="#modalDeleteConfirm" role="button" class="btn" rel="tooltip" title="<?php echo $mt->_("Delete") ?>" data-original-title="<?php echo $mt->_("Delete")?>" data-toggle="modal" onclick="deleteConfirm('<?php echo $event_id ?>', '<?php echo $name ?>')"><?php echo $mt->_("Delete")?> <i class="fa fa-trash-o"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-th-list"></i><?php echo $t->_("Event"); ?></h3>
+            </div>
+            <?php echo $this->tag->form(array("events/save", "method" => "post", "class" => "form-validate form-horizontal form-bordered", 'enctype' => 'multipart/form-data', 'id' => "eventsEdit")) ?>
+            <?php $this->partial("events/partials/formEvents") ?>
+            <?php echo $this->tag->hiddenField("event_id") ?>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        if ($('.datepick').length > 0) {
+            $('.datepick').datetimepicker({ 
+                format: 'YYYY-MM-DD hh:mm:ss' 
+            });
+        }
+    });
+</script>
+
+<?php $this->partial("events/partials/modalDeleteConfirm", array('title' => 'Delete People', 'size' => 'big')) ?>

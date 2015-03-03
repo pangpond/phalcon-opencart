@@ -1,0 +1,91 @@
+<?php use Phalcon\Tag; ?>
+
+<?php $this->partial("../../../views/common/partials/page-header", array('title' => $t->_("Search Items Subcategory"), 'size' => 'big')) ?>
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+<?php echo $this->getContent(); ?>
+
+<?php if(isset($keyword)) :?>
+<div class="row">
+    <div class="col-sm-12" style="margin-top:20px;">
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <?php echo $mt->_("Search result(s) for", array("keyword" => $keyword)) ?>
+        </div>
+    </div>
+</div>
+<?php endif ?>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="pull-left">
+            <?php echo $this->tag->linkTo(array("settings/items_subcategory", '<i class="fa fa-reply"></i> ' . $mt->_("Back"), 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Back"))) ?>
+        </div>
+
+        <div class="pull-right">
+            <?php echo $this->tag->linkTo(array("settings/items_subcategory/new", '<i class="fa fa-plus"></i> ' . $t->_("Create Items Subcategory"), 'class' => 'btn btn-primary', 'rel' => 'tooltip', 'title' => $t->_("Create Items Subcategory"))) ?>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-color box-bordered">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-table"></i><?php echo $t->_("Items Subcategory"); ?>
+                </h3>
+            </div>
+            <div class="box-content nopadding">
+                <table class="table table-hover table-nomargin table-bordered">
+                    <thead>
+                        <tr>
+                            <th><?php echo $t->_("Id"); ?></th>
+                            <th><?php echo $t->_("Items Type"); ?></th>
+                            <th><?php echo $t->_("Category Code"); ?></th>
+                            <th><?php echo $t->_("Subcategory Code"); ?></th>
+                            <th><?php echo $t->_("Subcategory Name"); ?></th>
+                            <th class='hidden-480 col-sm-1'><?php echo $mt->_("Options"); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($page->items as $subcategory) { ?>
+                        <tr>
+                            <td><?php echo $cat_id = isset($keyword) ? str_replace($keyword, '<strong>'.$keyword.'</strong>', $subcategory->cat_id) : $subcategory->cat_id ?></td>
+                            <td><?php echo $subcat_id = isset($keyword) ? str_replace($keyword, '<strong>'.$keyword.'</strong>', $subcategory->subcat_id) : $subcategory->subcat_id ?></td>
+                            <td><?php echo $type_id = isset($keyword) ? str_replace($keyword, '<strong>'.$keyword.'</strong>', $subcategory->type_id) : $subcategory->type_id ?></td>
+                            <td><?php echo $code = isset($keyword) ? str_replace($keyword, '<strong>'.$keyword.'</strong>', $subcategory->code) : $subcategory->code ?></td>
+                            <td><?php echo $name = isset($keyword) ? str_replace($keyword, '<strong>'.$keyword.'</strong>', $subcategory->name) : $subcategory->name ?></td>
+                            <td class='hidden-480'>
+                                <?php echo $this->tag->linkTo(array("settings/items_subcategory/edit/" . $subcategory->subcat_id, '<i class="fa fa-edit"></i>', 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Edit"))); ?>
+                                <a href="#modalDeleteConfirm" role="button" class="btn" rel="tooltip" title="<?php echo $mt->_("Delete") ?>" data-original-title="<?php echo $mt->_("Delete")?>" data-toggle="modal" onclick="deleteConfirm('<?php echo $subcategory->subcat_id ?>', '<?php echo $subcategory->name ?>')"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+
+                <div class="tables-info pull-left">
+                    <?php echo $mt->_("Showing page") . " <span>", $page->current, "</span> " . $mt->_("of") . " <span>", $page->total_pages, "</span> " . $mt->_("pages") . " (<span>", $page->total_items, "</span> " . $mt->_("entries") . ")"; ?>
+                </div>
+
+                <div class="table-pagination pull-right">
+                    <a href="<?php echo $baseUri ?>settings/items_subcategory/<?php echo $searchType ?>"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"> <?php echo $mt->_("First"); ?></i></a>
+                    <a href="<?php echo $baseUri ?>settings/items_subcategory/<?php echo $searchType ?>?page=<?= $page->before; ?>"><i class="fa fa-chevron-left"> <?php echo $mt->_("Previous"); ?></i></a>
+
+                    <a href="<?php echo $baseUri ?>settings/items_subcategory/<?php echo $searchType ?>?page=<?= $page->next; ?>"><?php echo $mt->_("Next"); ?> <i class="fa fa-chevron-right"></i></a>
+                    <a href="<?php echo $baseUri ?>settings/items_subcategory/<?php echo $searchType ?>?page=<?= $page->last; ?>"><?php echo $mt->_("Last"); ?> <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php $this->partial("items_subcategory/partials/modalDeleteConfirm", array('title' => $t->_("Delete Items Subcategory"), 'size' => 'big')) ?>

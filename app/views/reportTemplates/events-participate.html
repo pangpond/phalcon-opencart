@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+         <link href="stylesheets/pdf.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+
+        <style>
+            .event-title{
+                margin-bottom: 10px !important;
+                /*padding: 0 !important;*/
+                font-weight: bold;
+            }
+            .event-desp{
+                line-height: 22px !important;;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .dataTable td, .dataTable th{
+                text-align: center;
+            }
+            .dataTable td.people{
+                text-align: left;
+            }
+            td{
+                padding-left: 20px !important;
+                height: 40px;
+            }
+
+            .header, .footer {
+            position: fixed;
+          }
+
+          .header {
+            top: 0;
+          }
+
+          .footer {
+            bottom: 0;
+          }
+          #footer {
+              /*position: fixed;*/
+              left: 0px;
+              bottom: 0px;
+              right: 0px;
+              height: 200px;
+              background-color: white; }
+
+            tr    { page-break-inside:avoid; page-break-after:auto; }
+
+            table { page-break-inside:auto; }
+
+            #footer .page:after { content: counter(page); }
+        </style>
+        <script type="text/php">
+
+            if ( isset($pdf) ) {
+
+              $font = Font_Metrics::get_font("THSarabun", "bold");
+              $pdf->page_text(542, 806, "page : {PAGE_NUM}", $font, 10, array(0,0,0));
+
+            }
+        </script>
+    </head>
+
+    {{BODY}}
+
+    
+</html>

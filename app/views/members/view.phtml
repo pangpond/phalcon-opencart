@@ -1,0 +1,117 @@
+<?php use Phoenix\Models\Province; ?>
+
+<?php $this->partial("common/partials/page-header", array('title' => $t->_("Member Profile"), 'size' => 'big')) ?>
+
+<?php echo $this->getContent(); ?>
+
+<div class="breadcrumbs">
+    <ul>
+        <?php $this->crumbs->render();?>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="pull-left">
+            <?php echo $this->tag->linkTo(array("members", '<i class="fa fa-reply"></i> ' . $mt->_("Back"), 'class' => 'btn', 'rel' => 'tooltip', 'title' => $mt->_("Back"))) ?>
+        </div>
+        <div class="pull-right">
+            <?php echo $this->tag->linkTo(array("members/edit/" . $member->member_id, '<i class="fa fa-plus"></i> ' . $t->_("Edit Member"), 'class' => 'btn btn-primary', 'rel' => 'tooltip', 'title' => $t->_("Edit Member"))) ?>
+            <a href="#modalDeleteConfirm" role="button" class="btn" rel="tooltip" title="<?php echo $mt->_("Delete") ?>" data-original-title="<?php echo $mt->_("Delete")?>" data-toggle="modal" onclick="deleteConfirm('<?php echo $member_id ?>', '<?php echo $name ?>')"><?php echo $mt->_("Delete")?> <i class="fa fa-trash-o"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-user"></i>
+                    <?php echo $mt->_("Profile"); ?>
+                </h3>
+            </div>
+            <div class="box-content">
+                <address id="memberDetail">
+                     <strong><?php echo $name ?></strong>
+                        <br><?php echo $member->address ?>
+                        <br><?php echo $member->subdistrict_prefix ?><?php echo $member->subdistrict_name ?> <?php echo $member->district_prefix ?><?php echo $member->district_name ?> <?php echo $t->_("Province"); ?><?php echo $member->province_name ?> <?php echo $member->zipcode ?>
+                        <br><abbr title='Phone'><?php echo $t->_("Telephone"); ?>:</abbr> <?php echo $member->area_code . ' ' . $member->telephone ?>
+                        <br><abbr title='Fax'><?php echo $t->_("Fax"); ?>:</abbr> <?php echo $member->fax ?>
+                </address>
+                <dl>
+                    <dt><?php echo $mt->_("Status"); ?></dt>
+                    <dd>
+                        <?php echo $activeStatus = ($member->status) ? '<span class="label label-satgreen">' . $t->_("Active") . '</span>' : '<span class="label label-lightred">' . $t->_("Inactive") . '</span>'; ?>
+                    </dd>
+                    <dt><?php echo $mt->_("Image"); ?></dt>
+                    <dd>
+                        <ul class="gallery">
+                            <li>
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 180px;">
+                                        <a href="#">
+                                        <?php echo $this->tag->image(array($memberMeta['image'])); ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="extras">
+                                    <div class="extras-inner">
+                                        <?php echo $this->tag->linkTo(array($memberMeta['image'], '<i class="fa fa-search"></i> ', 'class' => 'colorbox-image', 'rel' => 'group-1')) ?>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-info"></i>
+                    <?php echo $mt->_("Information"); ?>
+                </h3>
+            </div>
+            <div class="box-content">
+                <dl>
+                    <dt><?php echo $t->_("Retired Date"); ?></dt>
+                    <dd>
+                       <?php echo $memberMeta['retired'] ?>
+                    </dd>
+                    <dt><?php echo $t->_("Mate"); ?></dt>
+                    <dd>
+                        <?php echo $memberMeta['mate'] ?>
+                    </dd>
+                    <dt><?php echo $mt->_("Note"); ?></dt>
+                    <dd>
+                        <?php echo $memberMeta['note'] ?>
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-info"></i>
+                    <?php echo $t->_("Academy"); ?>
+                </h3>
+            </div>
+            <div class="box-content">
+                <?php if($member->status) :?>
+                <address id="memberDetail">
+                     <strong><?php echo $mt->_("School") . $academy->name ?></strong>
+                        <br><?php echo $academy->address ?>
+                        <br><?php echo $academy->subdistrict_prefix ?><?php echo $academy->subdistrict_name ?> <?php echo $academy->district_prefix ?><?php echo $academy->district_name ?> <?php echo $t->_("Province"); ?><?php echo $academy->province_name ?> <?php echo $academy->zipcode ?>
+                        <br><abbr title='Phone'><?php echo $t->_("Telephone"); ?>:</abbr> <?php echo $academy->telephone ?>
+                        <br><abbr title='Fax'><?php echo $t->_("Fax"); ?>:</abbr> <?php echo $academy->fax ?>
+                </address>
+                <?php endif ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php $this->partial("members/partials/modalDeleteConfirm", array('title' => 'Delete Members', 'size' => 'big')) ?>
